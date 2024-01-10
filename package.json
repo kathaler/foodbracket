@@ -1,0 +1,14 @@
+{
+  "name": "foodbracket",
+  "version": "1.0.0",
+  "description": "A web app for users to choose a local restaurant through an interactive, bracket-style tournament",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ]
+}

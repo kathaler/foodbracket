@@ -1,29 +1,49 @@
 body {
-  font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
-  background-color: #2c2626;
+  font-family: "Chakra Petch", Arial, Helvetica, sans-serif;
+  background-color: #1e211d;
   text-align: center;
 }
 
-.title, h1 {
-  font-family: 'Silkscreen', 'Courier New', Courier, monospace;
+.title,
+h1 {
+  font-family: "Silkscreen", "Courier New", Courier, monospace;
 }
 
-h1 {
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #3d3d3d;
+}
+
+
+h1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  gap: 2rem;
   color: #dbdbdb;
 }
 
 h2 {
-  background-color: #333232;
-  color: #9e6c6c;
+  background-color: #2a2a2a;
+  color: #d2b5b5;
 }
 
 h3 {
   color: #adaead;
 }
 
-p, a, ul, li, label, input[type="submit"] {
-  font-family: 'Chakra Petch', sans-serif;
+p,
+a,
+ul,
+li,
+label,
+input[type="submit"] {
+  font-family: "Chakra Petch", sans-serif;
 }
 
 p {
@@ -75,7 +95,11 @@ input[type="submit"]:hover {
   background-color: #5678a3;
 }
 
-.boxed, .match, .links, .match-item {
+.boxed,
+.match,
+.links,
+.match-item,
+.user {
   color: #a3a1a1;
   background-color: #3d3d3d;
   border: 5px solid #7d7979;
@@ -83,6 +107,7 @@ input[type="submit"]:hover {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  padding: 8px;
 }
 
 .first-place {
@@ -96,4 +121,75 @@ svg.icon {
   height: 2em;
   vertical-align: middle;
   fill: #dbdbdb;
+  padding-top: 10px;
+}
+
+header {
+  border: 5px solid #000000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: large;
+  font-weight: 900;
+}
+
+.user-nav-container {
+  padding-right: 25px;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.matchups {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.matchup-item {
+  border: 2px solid #5a5400; 
+  padding: 10px;
+  text-align: center;
+}
+
+.matchup-item h2 {
+  margin: 0;
+  color: #d2b5b5; 
+}
+
+main {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.bracket-desc {
+  min-width: 20em;
+  width: min-content;
+  font-size: 1.5em;
+  padding: 1.2em;
+}
+
+.horizontal-line {
+  position: absolute;
+  top: 50%; 
+  left: 0;
+  width: 100%; 
+  height: 5px; 
+  background-color: black; 
 }

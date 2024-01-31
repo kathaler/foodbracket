@@ -89,3 +89,11 @@ input[type="submit"]:hover {
   border: 2px solid rgb(135, 0, 0);
   padding: 5px;
 }
+
+svg.icon {
+  display: inline;
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+  fill: #dbdbdb;
+}

@@ -1,38 +1,29 @@
-@font-face {
-  font-family: bodyFont;
-  src: url(../fonts/ChakraPetch-Regular.ttf);
-}
-
-@font-face {
-  font-family: titleFont;
-  src: url(../fonts/Silkscreen-Regular.ttf);
-}
-
 body {
+  font-family: 'Chakra Petch', Arial, Helvetica, sans-serif;
   background-color: #2c2626;
   text-align: center;
 }
 
-h1,
-h2,
-h3,
-p {
-  text-align: center;
-}
-
-h2,
-h3,
-p,
-a,
-ul,
-li,label,input[type="submit"]{
-  font-family: bodyFont;
+.title, h1 {
+  font-family: 'Silkscreen', 'Courier New', Courier, monospace;
 }
 
 h1 {
-  font-family: titleFont;
   background-color: #3d3d3d;
   color: #dbdbdb;
+}
+
+h2 {
+  background-color: #333232;
+  color: #9e6c6c;
+}
+
+h3 {
+  color: #adaead;
+}
+
+p, a, ul, li, label, input[type="submit"] {
+  font-family: 'Chakra Petch', sans-serif;
 }
 
 p {
@@ -45,17 +36,11 @@ a {
   text-decoration: none;
 }
 
-h2 {
-  background-color: #333232;
-  color: #9e6c6c;
-}
-
-h3 {
-  color: #adaead;
+a:hover {
+  text-decoration: underline;
 }
 
 ul {
-  text-align: center;
   list-style-type: none;
   padding: 0;
 }
@@ -66,61 +51,31 @@ ul li {
 }
 
 form {
-  background-color: #b3b2b2; /* White background for the form */
-  padding: 20px; /* Add some space inside the form */
-  margin: 30px auto; /* Center form in the page */
-  display: inline-block; /* Align the form elements properly */
-  text-align: left; /* Align form labels and inputs to the left */
+  background-color: #b3b2b2;
+  padding: 20px;
+  margin: 30px auto;
+  display: inline-block;
+  text-align: left;
 }
 
 label {
-  color: #5a5a5a; /* Matching the heading color */
-  margin-right: 10px; /* Space after label */
+  color: #5a5a5a;
+  margin-right: 10px;
 }
 
 input[type="submit"] {
-  background-color: #78a3da; /* A soft blue background for the submit button */
-  color: white; /* White text for the submit button */
-  padding: 10px 15px; /* Padding for the submit button */
-  border: none; /* Remove border from the submit button */
-  cursor: pointer; /* Cursor to pointer to indicate it's clickable */
+  background-color: #78a3da;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
-  background-color: #5678a3; /* Darker blue when hovering over the button */
+  background-color: #5678a3;
 }
 
-a {
-  color: #78a3da; /* Soft blue to match the submit button */
-  text-decoration: none; /* No underline */
-}
-
-a:hover {
-  text-decoration: underline; /* Underline on hover for better UX */
-}
-
-.boxed {
-  color: #a3a1a1;
-  background-color: #3d3d3d;
-  border: 5px solid #7d7979;
-  width: max-content;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.match {
-  color: #a3a1a1;
-  background-color: #3d3d3d;
-  border: 5px solid #7d7979;
-  width: max-content;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.match-item {
-  display: inline-block;
+.boxed, .match, .links, .match-item {
   color: #a3a1a1;
   background-color: #3d3d3d;
   border: 5px solid #7d7979;
@@ -133,14 +88,4 @@ a:hover {
 .first-place {
   border: 2px solid rgb(135, 0, 0);
   padding: 5px;
-}
-
-.links {
-    color: #a3a1a1;
-    background-color: #3d3d3d;
-    border: 5px solid #7d7979;
-    width: max-content;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }

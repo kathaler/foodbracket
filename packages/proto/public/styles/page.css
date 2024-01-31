@@ -1,12 +1,11 @@
 body {
-  font-family: "Chakra Petch", Arial, Helvetica, sans-serif;
-  background-color: #1e211d;
+  font-family: var(--font-family-primary);
+  background-color: var(--primary-color);
   text-align: center;
 }
 
-.title,
-h1 {
-  font-family: "Silkscreen", "Courier New", Courier, monospace;
+.title, h1 {
+  font-family: var(--font-family-secondary);
 }
 
 header {
@@ -29,8 +28,8 @@ h1 {
 }
 
 h2 {
-  background-color: #2a2a2a;
-  color: #d2b5b5;
+  background-color: var(--tertiary-color);
+  color: var(--font-color-secondary);
 }
 
 h3 {
@@ -43,7 +42,7 @@ ul,
 li,
 label,
 input[type="submit"] {
-  font-family: "Chakra Petch", sans-serif;
+  font-family: var(--font-family-primary);
 }
 
 p {
@@ -122,6 +121,7 @@ svg.icon {
   vertical-align: middle;
   fill: #dbdbdb;
   padding-top: 10px;
+  color: #dbdbdb;
 }
 
 header {

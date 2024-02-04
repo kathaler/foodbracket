@@ -1,0 +1,33 @@
+/* Resetting font families */
+body, p, a, ul, li, label, input[type="submit"] {
+    font-family: sans-serif;
+  }
+  
+  /* Resetting list styles and padding */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Removing text decorations for links */
+  a {
+    text-decoration: none;
+  }
+  
+  /* Resetting margin for list items */
+  ul li {
+    margin: 0;
+  }
+  
+  /* Resetting background and text color */
+  body, h1, h2, h3, p, form, a, .boxed, .match, .links, .match-item, .user {
+    background-color: transparent;
+    color: inherit;
+  }
+  
+  /* Resetting padding and border for form elements */
+  input[type="submit"], .boxed, .match, .links, .match-item, .user {
+    padding: 0;
+    border: none;
+  }
+  

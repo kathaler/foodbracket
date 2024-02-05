@@ -5,6 +5,7 @@
   "main": "app/index.html",
   "scripts": {
     "dev": "npx vite",
+    "sandbox": "npx vite --root sandbox",
     "build": "npx tsc && npx vite build"
   },
   "author": "",

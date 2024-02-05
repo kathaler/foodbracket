@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="./drop-down.ts"></script>
+    <script type="module" src="./user-panel.ts"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <div class="title-container">
+          <h1>Food Bracket</h1>
+        </div>
+        <nav class="nav-container">
+          <a href="your-restaurants.html" class="button boxed">Your Restaurants</a>
+          <a href="about.html" class="button boxed">About</a>
+          <a href="contact.html" class="button boxed">Contact</a>
+        </nav>
+      </div>
+      <nav class="user-nav-container">
+        <p>
+          Hello,
+          <drop-down align="right">
+            Test User
+            <user-panel
+              slot="menu"
+              avatar="../images/firestone.jpeg">
+              <span slot="name">Test User</span>
+            </user-panel>
+          </drop-down>
+        </p>
+      </nav>
+    </header>
+  </body>
+</html>

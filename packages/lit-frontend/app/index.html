@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script type="module" src="/src/drop-down.ts"></script>
+    <script type="module" src="/src/user-panel.ts"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
       rel="stylesheet"
@@ -25,8 +27,17 @@
         </nav>
       </div>
       <nav class="user-nav-container">
-        <a href="login.html" class="button boxed">Login</a>
-        <a href="signup.html" class="button boxed">Sign Up</a>
+        <p>
+          Hello,
+          <drop-down align="right">
+            User
+            <user-panel
+              slot="menu"
+              avatar="/images/firestone.jpeg">
+              <span slot="name">Test User</span>
+            </user-panel>
+          </drop-down>
+        </p>
       </nav>
     </header>
     <section class="preferences-section">

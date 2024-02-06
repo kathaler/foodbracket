@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="/styles/page.css" />
     <script type="module" src="/src/drop-down.ts"></script>
     <script type="module" src="/src/user-panel.ts"></script>
+    <script type="module" src="/src/toggle-switch.ts"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body id="body" class="dark">
     <header>
       <div class="header-left">
         <div class="title-container">
@@ -28,9 +29,9 @@
       </div>
       <nav class="user-nav-container">
         <p>
-          Hello,
           <drop-down align="right">
-            User
+            <img class="header-image" src="/images/firestone.jpeg" />
+            Hello, User
             <user-panel
               slot="menu"
               avatar="/images/firestone.jpeg">
@@ -67,7 +68,7 @@
     </section>
     <h2>Bracket</h2>
     <p class="boxed bordered-link">
-      <a href="bracket.html">Generate Bracket</a>
+      <a href="./bracket.html">Generate Bracket</a>
     </p>
   </body>
 </html>

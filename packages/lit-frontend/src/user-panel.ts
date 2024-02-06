@@ -38,6 +38,12 @@ class UserPanel extends LitElement {
       height: 2px;
       background-color: var(--secondary-color);
     }
+    body.dark .horizontal-line {
+      background-color: var(--secondary-color-dark);
+    }
+    body.light .horizontal-line {
+      background-color: var(--secondary-color-light);
+    }
   `;
 
   render() {
@@ -53,6 +59,7 @@ class UserPanel extends LitElement {
                 <li><a href="preferences.html" class="button boxed">Preferences</a></li>
                 <li>Logout</li>
             </ul>
+            <toggle-switch></toggle-switch>
         `;
   }
 }

@@ -1,6 +1,5 @@
 body {
   font-family: var(--font-family-primary);
-  background-color: var(--primary-color);
   text-align: center;
 }
 
@@ -12,7 +11,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #3d3d3d;
 }
 
 
@@ -24,16 +22,6 @@ h1 {
   padding: 0.5rem;
   padding-left: 2rem;
   gap: 2rem;
-  color: #dbdbdb;
-}
-
-h2 {
-  background-color: var(--tertiary-color);
-  color: var(--font-color-secondary);
-}
-
-h3 {
-  color: #adaead;
 }
 
 p,
@@ -45,13 +33,13 @@ input[type="submit"] {
   font-family: var(--font-family-primary);
 }
 
-p {
-  background-color: var(--secondary-color);
-  color: #a3a1a1;
-}
+/* p {
+  background-color: var(--secondary-color-dark);
+  color: var(--font-color-tertiary-dark);
+} */
 
 a {
-  color: #78a3da;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -83,7 +71,7 @@ label {
 }
 
 input[type="submit"] {
-  background-color: #78a3da;
+  background-color: var(--accent-color);
   color: white;
   padding: 10px 15px;
   border: none;
@@ -100,8 +88,6 @@ input[type="submit"]:hover {
 .match-item,
 .user {
   color: #a3a1a1;
-  background-color: #3d3d3d;
-  border: 5px solid #7d7979;
   width: max-content;
   text-align: center;
   margin-left: auto;
@@ -119,13 +105,7 @@ svg.icon {
   width: 2em;
   height: 2em;
   vertical-align: middle;
-  fill: #dbdbdb;
   padding-top: 10px;
-  color: #dbdbdb;
-}
-
-header {
-  border: 5px solid #000000;
 }
 
 .header-left {
@@ -143,6 +123,8 @@ header {
 }
 
 .user-nav-container {
+  display: flex;
+  align-items: center;
   padding-right: 25px;
 }
 
@@ -194,39 +176,75 @@ main {
   background-color: black; 
 }
 
-/* Style for the main restaurant info container */
-.restaurant-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  background-color: var(--secondary-color);
-  padding: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+ .header-image {
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+ }
+
+/* Dark theme styles */
+body.dark {
+  background-color: var(--primary-color-dark);
 }
 
-/* Style for the restaurant image */
-.restaurant-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+body.dark header,
+body.dark .boxed,
+body.dark .match,
+body.dark .links,
+body.dark .match-item,
+body.dark .user {
+  background-color: var(--secondary-color-dark);
 }
 
-/* Style for the details section */
-.details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+header {
+  border: 5px solid #000000;
 }
 
-/* Enhance the strong element for better visibility */
-.details strong {
-  color: var(--font-color-default);
-  font-weight: 1100;
+body.dark h1,
+body.dark p,
+body.dark input[type="submit"] {
+  color: var(--font-color-tertiary-dark);
+}
+
+body.dark label {
+  color: var(--secondary-color-dark);
+}
+
+body.dark h2 {
+  background-color: var(--tertiary-color-dark);
+  color: var(--font-color-secondary-dark);
+}
+
+a {
+  color: var(--accent-color);
+}
+
+form {
+  background-color: #b3b2b2;
+}
+
+/* Light theme styles */
+body.light {
+  background-color: var(--primary-color-light);
+}
+
+body.light header,
+body.light .match,
+body.light .links,
+body.light .match-item,
+body.light .user {
+  background-color: var(--secondary-color-light);
+}
+
+body.light h1,
+body.light p,
+body.light .boxed,
+body.light label,
+body.light input[type="submit"] {
+  color: var(--font-color-primary-light);
+}
+
+body.light h2 {
+  background-color: var(--tertiary-color-light);
+  color: var(--font-color-secondary-light);
 }

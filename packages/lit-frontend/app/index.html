@@ -10,6 +10,8 @@
     <script type="module" src="/src/drop-down.ts"></script>
     <script type="module" src="/src/user-panel.ts"></script>
     <script type="module" src="/src/toggle-switch.ts"></script>
+    <script type="module" src="/src/card.ts"></script>
+    <script type="module" src="/src/card-menu.ts"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
       rel="stylesheet"
@@ -41,34 +43,40 @@
         </p>
       </nav>
     </header>
-    <section class="preferences-section">
-      <h2>
-        <svg class="icon">
-          <use href="/icons/map-markers.svg#icon-information"></use>
-        </svg>
-        Begin By Selecting Your Preferences</h2>
-      <form id="preferencesForm">
-        <label for="location">Enter Your Location:</label>
-        <input type="text" id="location" name="location" placeholder="Zip code or City">
-    
-        <label for="delivery">Offers Delivery:</label>
-        <input type="checkbox" id="delivery" name="delivery">
-    
-        <label for="foodType">Type of Food:</label>
-        <select id="foodType" name="foodType">
-          <option value="any">Any</option>
-          <option value="fastfood">Fast Food</option>
-          <option value="sitdown">Sit Down</option>
-          <option value="healthy">Healthy</option>
-          <!-- Add more options as needed -->
-        </select>
-    
-        <input type="submit" value="Save Preferences">
-      </form>
-    </section>
-    <h2>Bracket</h2>
-    <p class="boxed bordered-link">
-      <a href="./bracket.html">Generate Bracket</a>
-    </p>
+    <div class="container">
+      <div class="left" >
+        <section class="preferences-section">
+          <h2>
+            <svg class="icon">
+              <use href="/icons/map-markers.svg#icon-information"></use>
+            </svg>
+            Begin By Selecting Your Preferences</h2>
+          <form id="preferencesForm">
+            <label for="location">Enter Your Location:</label>
+            <input type="text" id="location" name="location" placeholder="Zip code or City">
+        
+            <label for="delivery">Offers Delivery:</label>
+            <input type="checkbox" id="delivery" name="delivery">
+        
+            <label for="foodType">Type of Food:</label>
+            <select id="foodType" name="foodType">
+              <option value="any">Any</option>
+              <option value="fastfood">Fast Food</option>
+              <option value="sitdown">Sit Down</option>
+              <option value="healthy">Healthy</option>
+              <!-- Add more options as needed -->
+            </select>
+        
+            <input type="submit" value="Save Preferences">
+          </form>
+        </section>
+      </div>
+      <div class="right" >
+        <span class="menu-header">
+          <h2>Please select 8 restaurants to begin the bracket</h2>
+        </span>
+          <card-menu src="/data/restaurants.json"></card-menu>
+      </div>
+    </div>
   </body>
 </html>

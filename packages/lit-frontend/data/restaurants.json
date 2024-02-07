@@ -1,0 +1,100 @@
+{
+  "restaurants": [
+    {
+      "name": "Restaurant A",
+      "photo": "https://example.com/restaurant-a.jpg",
+      "ratings": 4.5,
+      "delivery": true,
+      "priceRange": "$$",
+      "foodType": "Italian"
+    },
+    {
+      "name": "Restaurant B",
+      "photo": "https://example.com/restaurant-b.jpg",
+      "ratings": 3.8,
+      "delivery": false,
+      "priceRange": "$",
+      "foodType": "Mexican"
+    },
+    {
+      "name": "Restaurant C",
+      "photo": "https://example.com/restaurant-c.jpg",
+      "ratings": 4.2,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Japanese"
+    },
+    {
+      "name": "Restaurant D",
+      "photo": "https://example.com/restaurant-d.jpg",
+      "ratings": 4.7,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Indian"
+    },
+    {
+      "name": "Restaurant E",
+      "photo": "https://example.com/restaurant-e.jpg",
+      "ratings": 3.5,
+      "delivery": false,
+      "priceRange": "$$",
+      "foodType": "Chinese"
+    },
+    {
+      "name": "Restaurant F",
+      "photo": "https://example.com/restaurant-f.jpg",
+      "ratings": 4.0,
+      "delivery": true,
+      "priceRange": "$",
+      "foodType": "Thai"
+    },
+    {
+      "name": "Restaurant G",
+      "photo": "https://example.com/restaurant-g.jpg",
+      "ratings": 4.9,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "French"
+    },
+    {
+      "name": "Restaurant H",
+      "photo": "https://example.com/restaurant-h.jpg",
+      "ratings": 3.2,
+      "delivery": false,
+      "priceRange": "$",
+      "foodType": "American"
+    },
+    {
+      "name": "Restaurant I",
+      "photo": "https://example.com/restaurant-i.jpg",
+      "ratings": 4.3,
+      "delivery": true,
+      "priceRange": "$$",
+      "foodType": "Mediterranean"
+    },
+    {
+      "name": "Restaurant J",
+      "photo": "https://example.com/restaurant-j.jpg",
+      "ratings": 4.6,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Korean"
+    },
+    {
+      "name": "Restaurant K",
+      "photo": "https://example.com/restaurant-k.jpg",
+      "ratings": 3.9,
+      "delivery": false,
+      "priceRange": "$$",
+      "foodType": "Vietnamese"
+    },
+    {
+      "name": "Restaurant L",
+      "photo": "https://example.com/restaurant-l.jpg",
+      "ratings": 4.4,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Greek"
+    }
+  ]
+}

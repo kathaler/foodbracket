@@ -70,7 +70,7 @@ class ToggleSwitchElement extends LitElement {
     const newBody: string = this.on ? "light" : "dark";
     const body: HTMLElement | null = document.getElementById("body");
     body?.classList.remove("light", "dark");
-    document.getElementById("body")?.classList.add(newBody);
+    document.body.classList.add(newBody);
   }
 }
 

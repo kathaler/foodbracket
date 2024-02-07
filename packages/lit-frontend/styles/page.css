@@ -248,3 +248,24 @@ body.light h2 {
   background-color: var(--tertiary-color-light);
   color: var(--font-color-secondary-light);
 }
+
+.container {
+  display: flex;
+  height: 80vh;
+}
+
+.left, .right {
+  flex: 1;
+}
+
+/* Optional styles for better visual separation */
+.left {
+  border: 2px solid rgb(26, 26, 26);
+  background-color: var(--left-color-dark);
+}
+
+.right {
+  border: 2px solid rgb(26, 26, 26);
+  background-color: var(--right-color-dark);
+}
+

@@ -9,6 +9,10 @@
     --font-color-secondary-dark: #d2b5b5;
     --font-color-tertiary-dark: #adaead;
     --border-color-dark: #7d7979;
+    --card-background-color-dark: #585858;
+
+    --left-color-dark: #333931;
+    --right-color-dark: #524a32;
 
     /* Light Theme */
     --primary-color-light: #dfdfdf;

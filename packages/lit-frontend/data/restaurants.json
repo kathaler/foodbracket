@@ -2,7 +2,7 @@
   "restaurants": [
     {
       "name": "Restaurant A",
-      "photo": "https://example.com/restaurant-a.jpg",
+      "photo": "../images/firestone.jpeg",
       "ratings": 4.5,
       "delivery": true,
       "priceRange": "$$",
@@ -95,6 +95,70 @@
       "delivery": true,
       "priceRange": "$$$",
       "foodType": "Greek"
+    },
+    {
+      "name": "Restaurant M",
+      "photo": "https://example.com/restaurant-m.jpg",
+      "ratings": 3.7,
+      "delivery": false,
+      "priceRange": "$",
+      "foodType": "Lebanese"
+    },
+    {
+      "name": "Restaurant N",
+      "photo": "https://example.com/restaurant-n.jpg",
+      "ratings": 4.1,
+      "delivery": true,
+      "priceRange": "$$",
+      "foodType": "Turkish"
+    },
+    {
+      "name": "Restaurant O",
+      "photo": "https://example.com/restaurant-o.jpg",
+      "ratings": 4.8,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Spanish"
+    },
+    {
+      "name": "Restaurant P",
+      "photo": "https://example.com/restaurant-p.jpg",
+      "ratings": 3.4,
+      "delivery": false,
+      "priceRange": "$",
+      "foodType": "Moroccan"
+    },
+    {
+      "name": "Restaurant Q",
+      "photo": "https://example.com/restaurant-q.jpg",
+      "ratings": 4.0,
+      "delivery": true,
+      "priceRange": "$$",
+      "foodType": "Brazilian"
+    },
+    {
+      "name": "Restaurant R",
+      "photo": "https://example.com/restaurant-r.jpg",
+      "ratings": 4.7,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Peruvian"
+    },
+    {
+      "name": "Restaurant S",
+      "photo": "https://example.com/restaurant-s.jpg",
+      "ratings": 3.5,
+      "delivery": false,
+      "priceRange": "$$",
+      "foodType": "Argentinian"
+    },
+    {
+      "name": "Restaurant T",
+      "photo": "https://example.com/restaurant-t.jpg",
+      "ratings": 4.2,
+      "delivery": true,
+      "priceRange": "$$$",
+      "foodType": "Colombian"
     }
   ]
 }

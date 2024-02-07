@@ -1,6 +1,7 @@
 body {
   font-family: var(--font-family-primary);
   text-align: center;
+  overflow-y: hidden;
 }
 
 .title, h1 {
@@ -11,6 +12,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-height: 60px;
 }
 
 
@@ -68,6 +70,7 @@ form {
 label {
   color: #5a5a5a;
   margin-right: 10px;
+  font-size: x-large;
 }
 
 input[type="submit"] {
@@ -211,7 +214,6 @@ body.dark label {
 }
 
 body.dark h2 {
-  background-color: var(--tertiary-color-dark);
   color: var(--font-color-secondary-dark);
 }
 
@@ -251,7 +253,7 @@ body.light h2 {
 
 .container {
   display: flex;
-  height: 80vh;
+  height: 100vh;
 }
 
 .left, .right {
@@ -268,4 +270,8 @@ body.light h2 {
   border: 2px solid rgb(26, 26, 26);
   background-color: var(--right-color-dark);
 }
+
+
+
+
 

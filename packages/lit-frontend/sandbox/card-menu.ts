@@ -36,10 +36,31 @@ class CardMenu extends LitElement {
       flex-wrap: wrap;
       justify-content: space-evenly;
       overflow: auto;
-      height: 90%;
+      height: 80vh;
       gap: 16px;
     }
   `;
+
+    filterRestaurants(filters: { delivery: boolean; priceRange: string; }) {
+      const filteredRestaurants = this.restaurants?.filter(restaurant => {
+        let matchesDelivery = true;
+        let matchesPriceRange = true;
+
+        if (filters.delivery) {
+          matchesDelivery = restaurant.delivery === filters.delivery;
+        }
+
+        if (filters.priceRange !== 'any') {
+          matchesPriceRange = restaurant.priceRange === filters.priceRange;
+        }
+
+        return matchesDelivery && matchesPriceRange;
+      });
+
+      // Update the state to cause re-render
+      this.restaurants = filteredRestaurants;
+      this.requestUpdate();
+    }
 
   connectedCallback() {
     if (this.src) {

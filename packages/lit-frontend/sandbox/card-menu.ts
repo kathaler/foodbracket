@@ -8,9 +8,10 @@ class CardMenu extends LitElement {
 
   @state()
   restaurants?: Restaurant[];
+  fRestaurants?: Restaurant[];
 
   render() {
-    const rows = this.restaurants || [];
+    const rows = this.fRestaurants || [];
     return html`
       <div class="restaurant-cards">
         ${rows.map(restaurant => html`
@@ -51,14 +52,14 @@ class CardMenu extends LitElement {
         }
 
         if (filters.priceRange !== 'any') {
+          console.log(filters.priceRange);
           matchesPriceRange = restaurant.priceRange === filters.priceRange;
         }
 
         return matchesDelivery && matchesPriceRange;
       });
 
-      // Update the state to cause re-render
-      this.restaurants = filteredRestaurants;
+      this.fRestaurants = filteredRestaurants;
       this.requestUpdate();
     }
 

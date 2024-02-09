@@ -1,8 +1,6 @@
-// preferences-form.ts
 import { LitElement, html, css } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 
-@customElement("preferences-form")
 class PreferencesForm extends LitElement {
   @state() private location: string = "";
   @state() private delivery: boolean = false;
@@ -26,7 +24,7 @@ class PreferencesForm extends LitElement {
 
   render() {
     return html`
-      <form class="preferencesForm" @submit=${this.handleSubmit}>
+      <form class="preferencesForm" @submit=${this._handleSubmit}>
         <div id="location-prompt">
           <label for="location">Enter Your Location:</label>
           <input
@@ -60,9 +58,9 @@ class PreferencesForm extends LitElement {
             (this.priceRange = e.target.value)}
         >
           <option value="any">Any</option>
-          <option value="cheap">$</option>
-          <option value="moderate">$$</option>
-          <option value="pricey">$$$</option>
+          <option value="$">$</option>
+          <option value="$$">$$</option>
+          <option value="$$$">$$$</option>
         </select>
 
         <input type="submit" value="Save Preferences" />
@@ -70,7 +68,7 @@ class PreferencesForm extends LitElement {
     `;
   }
 
-  handleSubmit(event: Event) {
+  _handleSubmit(event: Event) {
     event.preventDefault();
     this.dispatchEvent(
       new CustomEvent("preferences-updated", {
@@ -85,3 +83,5 @@ class PreferencesForm extends LitElement {
     );
   }
 }
+
+customElements.define("preferences-form", PreferencesForm);

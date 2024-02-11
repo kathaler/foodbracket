@@ -53,7 +53,7 @@
             </svg>
             Begin By Selecting Your Preferences
           </h2>
-          <preferences-form @preferences-updated=${this.handlePreferencesUpdated}></preferences-form>
+          <preferences-form></preferences-form>
         </section>
       </div>
       <div class="right" >
@@ -62,17 +62,6 @@
         </span>
           <card-menu id=cardMenu src="../data/restaurants.json"></card-menu>
       </div>
-      <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-          const preferencesForm = document.querySelector('preferences-form');
-          const cardMenu = document.querySelector('card-menu');
-        
-          preferencesForm.addEventListener('preferences-updated', event => {
-            const { location, delivery, priceRange } = event.detail;
-            cardMenu.filterRestaurants({ delivery, priceRange });
-          });
-        });
-      </script>
     </div>
   </body>
 </html>

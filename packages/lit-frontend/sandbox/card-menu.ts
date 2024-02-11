@@ -42,32 +42,44 @@ class CardMenu extends LitElement {
     }
   `;
 
-    filterRestaurants(filters: { delivery: boolean; priceRange: string; }) {
-      const filteredRestaurants = this.restaurants?.filter(restaurant => {
-        let matchesDelivery = true;
-        let matchesPriceRange = true;
+  filterRestaurants(filters: { delivery: boolean; priceRange: string; }) {
+    const filteredRestaurants = this.restaurants?.filter(restaurant => {
+      let matchesDelivery = true;
+      let matchesPriceRange = true;
 
-        if (filters.delivery) {
-          matchesDelivery = restaurant.delivery === filters.delivery;
-        }
+      if (filters.delivery) {
+        matchesDelivery = restaurant.delivery === filters.delivery;
+      }
 
-        if (filters.priceRange !== 'any') {
-          console.log(filters.priceRange);
-          matchesPriceRange = restaurant.priceRange === filters.priceRange;
-        }
+      if (filters.priceRange !== 'any') {
+        console.log(filters.priceRange);
+        matchesPriceRange = restaurant.priceRange === filters.priceRange;
+      }
 
-        return matchesDelivery && matchesPriceRange;
-      });
+      return matchesDelivery && matchesPriceRange;
+    });
 
-      this.fRestaurants = filteredRestaurants;
-      this.requestUpdate();
-    }
+    this.fRestaurants = filteredRestaurants;
+    this.requestUpdate();
+  }
 
   connectedCallback() {
     if (this.src) {
       this._fetchData(this.src);
     }
     super.connectedCallback();
+    document.addEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+    super.disconnectedCallback();
+  }
+
+  handlePreferencesUpdated(event: CustomEvent) {
+    console.log('Preferences updated', event.detail);
+    const {delivery, priceRange} = event.detail;
+    this.filterRestaurants({delivery, priceRange});
   }
 
   _fetchData(src: string) {

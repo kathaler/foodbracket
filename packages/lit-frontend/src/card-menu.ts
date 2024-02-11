@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { Restaurant } from "../src/models/restaurant";
+import { Restaurant } from "./models/restaurant";
 
 class CardMenu extends LitElement {
   @property()
@@ -8,9 +8,10 @@ class CardMenu extends LitElement {
 
   @state()
   restaurants?: Restaurant[];
+  fRestaurants?: Restaurant[];
 
   render() {
-    const rows = this.restaurants || [];
+    const rows = this.fRestaurants || [];
     return html`
       <div class="restaurant-cards">
         ${rows.map(restaurant => html`
@@ -36,16 +37,47 @@ class CardMenu extends LitElement {
       flex-wrap: wrap;
       justify-content: space-evenly;
       overflow: auto;
-      height: 90%;
+      height: 80vh;
       gap: 16px;
     }
   `;
+
+  filterRestaurants(filters: { delivery: boolean; priceRange: string; }) {
+    const filteredRestaurants = this.restaurants?.filter(restaurant => {
+      let matchesDelivery = true;
+      let matchesPriceRange = true;
+
+      if (filters.delivery) {
+        matchesDelivery = restaurant.delivery === filters.delivery;
+      }
+
+      if (filters.priceRange !== 'any') {
+        matchesPriceRange = restaurant.priceRange === filters.priceRange;
+      }
+
+      return matchesDelivery && matchesPriceRange;
+    });
+
+    this.fRestaurants = filteredRestaurants;
+    this.requestUpdate();
+  }
 
   connectedCallback() {
     if (this.src) {
       this._fetchData(this.src);
     }
     super.connectedCallback();
+    document.addEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+    super.disconnectedCallback();
+  }
+
+  handlePreferencesUpdated(event: CustomEvent) {
+    const {delivery, priceRange} = event.detail;
+    this.filterRestaurants({delivery, priceRange});
   }
 
   _fetchData(src: string) {

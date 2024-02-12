@@ -14,7 +14,7 @@ class RestaurantCard extends LitElement {
     const rows = this.restaurants || [];
 
     const renderRow = (row: Restaurant) => {
-        const { name, photo, ratings, delivery, pricerange, foodType } = row;
+        const { name, photo, ratings, delivery, priceRange, foodType } = row;
 
         return html`
         <div class="card">
@@ -25,7 +25,7 @@ class RestaurantCard extends LitElement {
             ${ratings}
           </div>
           <div class="delivery">Delivery: ${delivery ? "Yes" : "No"}</div>
-          <div class="price-range">Price Range: ${pricerange}</div>
+          <div class="price-range">Price Range: ${priceRange}</div>
           <div class="food-type">Food Type: ${foodType}</div>
         </div>
       `;

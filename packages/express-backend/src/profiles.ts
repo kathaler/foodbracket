@@ -6,12 +6,12 @@ function index(): Promise<Profile[]> {
 }
 
 function get(userid: String): Promise<Profile> {
-    return ProfileModel.findOne({ userid })
-    .then((list) => list[0]) // Added type assertion and fixed list index
-    .catch((error) => {
+    return ProfileModel.find({ userid })
+      .then((list) => list[0])
+      .catch((err) => {
         throw `${userid} Not Found`;
-    });
-}
+      });
+  }
 
 function create(profile: Profile): Promise<Profile> {
     const p = new ProfileModel(profile);

@@ -50,9 +50,9 @@ class UserPanel extends LitElement {
     return html`
             <div class="header"> 
                 <img src=${this.avatar} />
-                <h2><slot name="name">John Doe</h2>
+                <h2 name="name">John Doe</h2>
             </div>
-            <div class="menu">
+            <div class="menu"></div>
             <div class="horizontal-line"></div>
             <ul>
                 <li><a href="profile.html" class="button boxed">Profile</a></li>

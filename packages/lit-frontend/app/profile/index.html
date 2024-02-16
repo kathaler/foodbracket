@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/src/drop-down.ts"></script>
+    <script type="module" src="/src/user-panel.ts"></script>
+    <script type="module" src="/src/toggle-switch.ts"></script>
+    <script type="module" src="/src/user-profile.ts"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body id="body" class="dark">
+    <header>
+      <div class="header-left">
+        <div class="title-container">
+          <h1>Food Bracket</h1>
+        </div>
+        <nav class="nav-container">
+          <a href="your-restaurants.html" class="button boxed">Your Restaurants</a>
+          <a href="about.html" class="button boxed">About</a>
+          <a href="contact.html" class="button boxed">Contact</a>
+        </nav>
+      </div>
+      <nav class="user-nav-container">
+        <p>
+          <drop-down align="right">
+            <img class="header-image" src="/images/firestone.jpeg" />
+            Hello, User
+            <user-panel
+              slot="menu"
+              avatar="/images/firestone.jpeg">
+              <span slot="name">Test User</span>
+            </user-panel>
+          </drop-down>
+        </p>
+      </nav>
+    </header>
+    <user-profile path="profiles/user1"></user-profile>
+  </body>
+</html>

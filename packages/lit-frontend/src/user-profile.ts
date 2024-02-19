@@ -69,10 +69,32 @@ export class UserProfileElement extends LitElement {
 
 export class UserProfileEditElement extends UserProfileElement {
   render() {
+    const profile = (this.profile || {}) as Profile;
+    const {userid, name, nickname, zip, city, restaurants} = profile;
+
+    console.log("Rendering form", this.profile);
     return html`
-      <form @submit=${this._handleSubmit}>
-      <button type="submit">Save</button>
-    </form>
+      <section>
+        <form @submit=${this._handleSubmit}>
+          <dl>
+            <dt>Username</dt>
+            <dd
+              ><input name="userid" disabled .value=${userid}
+            /></dd>
+            <dt>Name</dt>
+            <dd><input name="name" .value=${name} /></dd>
+            <dt>Nickname</dt>
+            <dd
+              ><input name="nickname" .value=${nickname}
+            /></dd>
+            <dt>Zip Code</dt>
+            <dd><input name="zip" .value=${zip} /></dd>
+            <dt>Home City</dt>
+            <dd><input name="city" .value=${city} /></dd>
+          </dl>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
     `;
   }
 

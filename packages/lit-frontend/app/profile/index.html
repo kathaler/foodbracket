@@ -11,38 +11,15 @@
     <script type="module" src="/src/user-panel.ts"></script>
     <script type="module" src="/src/toggle-switch.ts"></script>
     <script type="module" src="/src/user-profile.ts"></script>
+    <script type="module" src="/src/header.ts"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Silkscreen&display=swap"
       rel="stylesheet"
     />
   </head>
   <body id="body" class="dark">
-    <header>
-      <div class="header-left">
-        <div class="title-container">
-          <h1>Food Bracket</h1>
-        </div>
-        <nav class="nav-container">
-          <a href="your-restaurants.html" class="button boxed">Your Restaurants</a>
-          <a href="about.html" class="button boxed">About</a>
-          <a href="contact.html" class="button boxed">Contact</a>
-        </nav>
-      </div>
-      <nav class="user-nav-container">
-        <p>
-          <drop-down align="right">
-            <img class="header-image" src="/images/firestone.jpeg" />
-            Hello, User
-            <user-panel
-              slot="menu"
-              avatar="/images/firestone.jpeg">
-              <span slot="name">Test User</span>
-            </user-panel>
-          </drop-down>
-        </p>
-      </nav>
-    </header>
+    <header-element></header-element>
     <user-profile path="profiles/karl"></user-profile>
-    <user-profile-edit path="profiles/karl/edit"></user-profile-edit>
+    <user-profile-edit path="profiles/karl"></user-profile-edit>
   </body>
 </html>

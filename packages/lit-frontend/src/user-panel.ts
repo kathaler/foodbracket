@@ -38,11 +38,8 @@ class UserPanel extends LitElement {
       height: 2px;
       background-color: var(--secondary-color);
     }
-    body.dark .horizontal-line {
-      background-color: var(--secondary-color-dark);
-    }
-    body.light .horizontal-line {
-      background-color: var(--secondary-color-light);
+    .horizontal-line {
+      background-color: var(--secondary-color);
     }
   `;
 

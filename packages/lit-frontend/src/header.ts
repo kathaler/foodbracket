@@ -3,40 +3,84 @@ import { LitElement, html, css } from "lit";
 export class HeaderElement extends LitElement {
   render() {
     return html`
-    <header>
-      <div class="header-left">
-        <div class="title-container">
-          <h1>Food Bracket</h1>
+      <header>
+        <div class="header-left">
+          <span>Food Bracket</span>
+          <nav class="nav-container">
+            <a href="your-restaurants.html" class="button boxed"
+              >Your Restaurants</a
+            >
+            <a href="about.html" class="button boxed">About</a>
+            <a href="contact.html" class="button boxed">Contact</a>
+          </nav>
         </div>
-        <nav class="nav-container">
-          <a href="your-restaurants.html" class="button boxed">Your Restaurants</a>
-          <a href="about.html" class="button boxed">About</a>
-          <a href="contact.html" class="button boxed">Contact</a>
+        <nav class="user-nav-container">
+            <drop-down align="right">
+                <div class="header-user">
+                    <img class="header-image" src="/images/firestone.jpeg" />
+                    Hello, User
+                </div>
+              <user-panel slot="menu" avatar="/images/firestone.jpeg">
+                <span slot="name">Test User</span>
+              </user-panel>
+            </drop-down>
         </nav>
-      </div>
-      <nav class="user-nav-container">
-        <p>
-          <drop-down align="right">
-            <img class="header-image" src="/images/firestone.jpeg" />
-            Hello, User
-            <user-panel
-              slot="menu"
-              avatar="/images/firestone.jpeg">
-              <span slot="name">Test User</span>
-            </user-panel>
-          </drop-down>
-        </p>
-      </nav>
-    </header>
+      </header>
     `;
   }
 
   static styles = css`
     header {
-      background-color: #f0f0f0;
-      padding: 10px;
-      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      background-color: var(--secondary-color);
+      color: var(--secondary-color);
     }
+
+    .header-user {
+      color: var(--font-color-default);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px; 
+      padding-right: 20px;
+    }
+
+    span {
+      color: var(--font-color-default);
+      font-family: var(--font-family-secondary);
+      font-size: 2em;
+      padding-left: 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .header-image {
+      width: 10%;
+      height: 10%;
+      border-radius: 50%;
+    }
+
+    .button {
+      padding: 8px 12px;
+      text-decoration: none;
+      color: var(--font-color-default);
+      background-color: var(--secondary-color);
+      border-radius: 5px; /* Adds rounded corners */
+      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .button:hover,
+    .header-user:hover {
+      background-color: var(--primary-color); /* Change color on hover */
+    }
+
   `;
 }
 customElements.define("header-element", HeaderElement);

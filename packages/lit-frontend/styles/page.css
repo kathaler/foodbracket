@@ -35,11 +35,6 @@ input[type="submit"] {
   font-family: var(--font-family-primary);
 }
 
-/* p {
-  background-color: var(--secondary-color-dark);
-  color: var(--font-color-tertiary-dark);
-} */
-
 a {
   color: var(--accent-color);
   text-decoration: none;
@@ -185,36 +180,35 @@ main {
   border-radius: 50%;
  }
 
-/* Dark theme styles */
-body.dark {
-  background-color: var(--primary-color-dark);
+body {
+  background-color: var(--primary-color);
 }
 
-body.dark header,
-body.dark .boxed,
-body.dark .match,
-body.dark .links,
-body.dark .match-item,
-body.dark .user {
-  background-color: var(--secondary-color-dark);
+header,
+.boxed,
+.match,
+.links,
+.match-item,
+.user {
+  background-color: var(--secondary-color);
 }
 
 header {
   border: 5px solid #000000;
 }
 
-body.dark h1,
-body.dark p,
-body.dark input[type="submit"] {
-  color: var(--font-color-tertiary-dark);
+h1,
+p,
+input[type="submit"] {
+  color: var(--font-color-tertiary);
 }
 
-body.dark label {
-  color: var(--secondary-color-dark);
+label {
+  color: var(--secondary-color);
 }
 
-body.dark h2 {
-  color: var(--font-color-secondary-dark);
+h2 {
+  color: var(--font-color-secondary);
 }
 
 a {
@@ -223,32 +217,6 @@ a {
 
 form {
   background-color: #b3b2b2;
-}
-
-/* Light theme styles */
-body.light {
-  background-color: var(--primary-color-light);
-}
-
-body.light header,
-body.light .match,
-body.light .links,
-body.light .match-item,
-body.light .user {
-  background-color: var(--secondary-color-light);
-}
-
-body.light h1,
-body.light p,
-body.light .boxed,
-body.light label,
-body.light input[type="submit"] {
-  color: var(--font-color-primary-light);
-}
-
-body.light h2 {
-  background-color: var(--tertiary-color-light);
-  color: var(--font-color-secondary-light);
 }
 
 .container {
@@ -260,15 +228,14 @@ body.light h2 {
   flex: 1;
 }
 
-/* Optional styles for better visual separation */
 .left {
   border: 2px solid rgb(26, 26, 26);
-  background-color: var(--left-color-dark);
+  background-color: var(--left-color);
 }
 
 .right {
   border: 2px solid rgb(26, 26, 26);
-  background-color: var(--right-color-dark);
+  background-color: var(--right-color);
 }
 
 

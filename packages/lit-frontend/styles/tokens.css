@@ -1,28 +1,4 @@
 :root {
-    /* Color tokens */
-    /* Dark Theme */
-    --primary-color-dark: #1e211d;
-    --secondary-color-dark: #3d3d3d;
-    --tertiary-color-dark: #2a2a2a;
-    --accent-color: #78a3da;
-    --font-color-default-dark: #dbdbdb;
-    --font-color-secondary-dark: #d2b5b5;
-    --font-color-tertiary-dark: #adaead;
-    --border-color-dark: #7d7979;
-    --card-background-color-dark: #585858;
-
-    --left-color-dark: #333931;
-    --right-color-dark: #564e4e;
-
-    /* Light Theme */
-    --primary-color-light: #dfdfdf;
-    --secondary-color-light: #a39e9e;
-    --tertiary-color-light: #d3d3d3;
-    --font-color-default-light: #1e1e1e;
-    --font-color-secondary-light: #463636;
-    --font-color-tertiary-light: #2b2b2b;
-    --border-color-light: #7d7979;
-
     /* Font family tokens */
     --font-family-primary: "Chakra Petch", Arial, Helvetica, sans-serif;
     --font-family-secondary: "Silkscreen", "Courier New", Courier, monospace;
@@ -30,4 +6,30 @@
     /* Other tokens */
     --padding-standard: 10px;
     --border-standard: 5px solid;
+  }
+
+  body.dark {
+    --primary-color: #1e211d;
+    --secondary-color: #3d3d3d;
+    --tertiary-color: #2a2a2a;
+    --accent-color: #78a3da;
+    --font-color-default: #dbdbdb;
+    --font-color-secondary: #d2b5b5;
+    --font-color-tertiary: #adaead;
+    --border-color: #7d7979;
+    --card-background-color: #585858;
+
+    --left-color: #333931;
+    --right-color: #564e4e;
+  }
+
+  body.light {
+    /* Light Theme */
+    --primary-color: #dfdfdf;
+    --secondary-color: #a39e9e;
+    --tertiary-color: #d3d3d3;
+    --font-color-default: #1e1e1e;
+    --font-color-secondary: #463636;
+    --font-color-tertiary: #2b2b2b;
+    --border-color: #7d7979;
   }

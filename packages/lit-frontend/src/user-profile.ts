@@ -26,9 +26,79 @@ export class UserProfileElement extends LitElement {
   }
 
   static styles = css`
-    h1 {
-      font-size: 1.5em;
+    section {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: var(--tertiary-color);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
+    a {
+      display: inline-block;
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 8px 12px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+    h1 {
+      color: var(--font-color-default);
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    dl {
+      background-color: var(--tertiary-color);
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    dt {
+      font-weight: bold;
+      color: var(--font-color-default);
+    }
+
+    dd {
+      margin-bottom: 10px;
+      margin-left: 20px;
+      color: var(--font-color-secondary);
+    }
+
+    dd:last-child {
+      margin-bottom: 0;
+    }
+
+    dt,
+    dd {
+      display: inline-block; /* Make dt and dd inline-block */
+      margin: 0; /* Remove default margins */
+    }
+
+    /* New style for flexbox layout */
+    .profile-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .profile-item dt {
+      flex-basis: 100%; /* Adjust the width of dt */
+    }
+
+    .profile-item dd {
+      flex-basis: 100%; /* Adjust the width of dd */
+      margin-left: 0; /* Reset margin-left */
     }
   `;
 
@@ -40,14 +110,22 @@ export class UserProfileElement extends LitElement {
         <a href="./${userid}/edit">Edit</a>
         <h1>${name}</h1>
         <dl>
-          <dt>Username</dt>
-          <dd>${userid}</dd>
-          <dt>Nickname</dt>
-          <dd>${nickname}</dd>
-          <dt>Zip</dt>
-          <dd>${zip}</dd>
-          <dt>Home City</dt>
-          <dd>${city}</dd>
+          <div class="profile-item">
+            <dt>Username</dt>
+            <dd>${userid}</dd>
+          </div>
+          <div class="profile-item">
+            <dt>Nickname</dt>
+            <dd>${nickname}</dd>
+          </div>
+          <div class="profile-item">
+            <dt>Zip</dt>
+            <dd>${zip}</dd>
+          </div>
+          <div class="profile-item">
+            <dt>Home City</dt>
+            <dd>${city}</dd>
+          </div>
         </dl>
       </section>
     `;
@@ -70,7 +148,7 @@ export class UserProfileElement extends LitElement {
 export class UserProfileEditElement extends UserProfileElement {
   render() {
     const profile = (this.profile || {}) as Profile;
-    const {userid, name, nickname, zip, city, restaurants} = profile;
+    const { userid, name, nickname, zip, city, restaurants } = profile;
 
     console.log("Rendering form", this.profile);
     return html`
@@ -78,25 +156,42 @@ export class UserProfileEditElement extends UserProfileElement {
         <form @submit=${this._handleSubmit}>
           <dl>
             <dt>Username</dt>
-            <dd
-              ><input name="userid" disabled .value=${userid}
-            /></dd>
+            <dd><input name="userid" disabled .value=${userid} /></dd>
             <dt>Name</dt>
             <dd><input name="name" .value=${name} /></dd>
             <dt>Nickname</dt>
-            <dd
-              ><input name="nickname" .value=${nickname}
-            /></dd>
+            <dd><input name="nickname" .value=${nickname ?? ""} /></dd>
             <dt>Zip Code</dt>
-            <dd><input name="zip" .value=${zip} /></dd>
+            <dd><input name="zip" .value=${zip ?? ""} /></dd>
             <dt>Home City</dt>
-            <dd><input name="city" .value=${city} /></dd>
+            <dd><input name="city" .value=${city ?? ""} /></dd>
           </dl>
           <button type="submit">Submit</button>
         </form>
       </section>
     `;
   }
+
+  static styles = css`
+    section {
+      display: block;
+    }
+
+    form {
+      display: block;
+    }
+
+    dt {
+      font-weight: bold;
+      color: var(--font-color-default);
+    }
+
+    dd {
+      margin-bottom: 10px;
+      margin-left: 20px;
+      color: var(--font-color-secondary);
+    }
+  `;
 
   _handleSubmit(event: Event) {
     event.preventDefault();
@@ -113,14 +208,17 @@ export class UserProfileEditElement extends UserProfileElement {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
-    }).then((response) => {
-      if (response.status === 200) return response.json();
-    }).then((json : unknown) => {
-      if (json) this.profile = json as Profile;
-    }).catch((err) => {
-      console.log("Failed to PUT form data", err)
-    });
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) return response.json();
+      })
+      .then((json: unknown) => {
+        if (json) this.profile = json as Profile;
+      })
+      .catch((err) => {
+        console.log("Failed to PUT form data", err);
+      });
   }
 }
 

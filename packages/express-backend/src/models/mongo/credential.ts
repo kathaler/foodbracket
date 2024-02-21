@@ -1,7 +1,8 @@
 import {Schema, model} from "mongoose";
+import {Credential} from "../credential";
 
 
-const credentialSchema = new Schema(
+const credentialSchema = new Schema<Credential>(
     {
         username : {type: String, require: true, trim: true},
         hashedPassword : {type: String, require: true}

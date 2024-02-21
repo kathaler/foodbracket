@@ -1,5 +1,5 @@
-import ProfileModel from "./models/mongo/profile";
-import { Profile } from "./models/profile";
+import ProfileModel from "../models/mongo/profile";
+import { Profile } from "../models/profile";
 
 function index(): Promise<Profile[]> {
     return ProfileModel.find();

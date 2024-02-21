@@ -1,0 +1,32 @@
+import { Credential } from "../models/credential";
+import CredentialModel from "../models/mongo/credential";
+import bcrypt from "bcrypt";
+
+export function create(username: string, password: string) {
+    return new Promise<Credential>((resolve, reject) => {
+      if (!username || !password) {
+        reject("must provide username and password");
+      }
+      CredentialModel
+        .find({ username })
+        .then((found: Credential[]) => {
+          if (found.length) reject("username exists");
+        })
+        .then(() =>
+          bcrypt
+            .genSalt(10)
+            .then((salt: string) => bcrypt.hash(password, salt))
+            .then((hashedPassword: string) => {
+              const creds = new CredentialModel({
+                username,
+                hashedPassword
+              });
+              creds.save().then((created: Credential) => {
+                if (created) resolve(created);
+              });
+            })
+        );
+    });
+  }
+
+export default { create };

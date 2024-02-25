@@ -1,7 +1,7 @@
 import { LitElement, html, css, render } from "lit";
-import { Profile } from "../src/models/profile";
+import { Profile } from "../models/profile";
 import { property, state } from "lit/decorators.js";
-import { serverPath } from "./rest";
+import { serverPath } from "../rest";
 
 export class UserProfileElement extends LitElement {
   @property()

@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { Restaurant } from '../src/models/restaurant';
+import { Restaurant } from '../models/restaurant';
 
 class Card extends LitElement {
   @property({ type: Object }) restaurant?: Restaurant;

@@ -1,4 +1,6 @@
 import { LitElement, html, css } from "lit";
+import "./user-panel.ts";
+import "./drop-down.ts";
 
 export class HeaderElement extends LitElement {
   render() {

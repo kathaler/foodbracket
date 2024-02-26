@@ -1,6 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { Restaurant } from "../src/models/restaurant";
+import { Restaurant } from "ts-models";
 
 class CardMenu extends LitElement {
   @property()

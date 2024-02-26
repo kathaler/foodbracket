@@ -1,8 +1,8 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import "../components/preferences-form.ts";
 import "../components/card-menu.ts";
-import resetCSS from "../styles/reset.css?inline";
-import pageCSS from "../styles/page.css?inline";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 export class MainPageElement extends LitElement {
   render() {

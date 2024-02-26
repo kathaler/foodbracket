@@ -52,7 +52,7 @@ class UserPanel extends LitElement {
             <div class="menu"></div>
             <div class="horizontal-line"></div>
             <ul>
-                <li><a href="profile.html" class="button boxed">Profile</a></li>
+                <li><a href="./profile/karl" class="button boxed">Profile</a></li>
                 <li><a href="preferences.html" class="button boxed">Preferences</a></li>
                 <li>Logout</li>
             </ul>

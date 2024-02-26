@@ -1,6 +1,8 @@
-import { LitElement, html } from "lit";
-import  "../components/preferences-form.ts";
+import { LitElement, html, css, unsafeCSS } from "lit";
+import "../components/preferences-form.ts";
 import "../components/card-menu.ts";
+import resetCSS from "../styles/reset.css?inline";
+import pageCSS from "../styles/page.css?inline";
 
 export class MainPageElement extends LitElement {
   render() {
@@ -26,6 +28,8 @@ export class MainPageElement extends LitElement {
       </div>
     `;
   }
+
+  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS)];
 }
 
 customElements.define("main-page", MainPageElement);

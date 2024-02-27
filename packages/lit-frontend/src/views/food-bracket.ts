@@ -1,25 +1,22 @@
 import { LitElement, html } from 'lit';
 import '../components/header.ts';
 import './main-page.ts';
-import { Router } from '@vaadin/router';
+import '../components/vaadin-router.ts';
+// MVU
+import * as App from "../app";
+import routes from "../routes";
+import update from "../update";
 
-export class FoodBracketElement extends LitElement {
+export class FoodBracketElement extends App.Main {
+    constructor() {
+        super(update);
+    }
+    
     render() {
         return html`
             <header-element></header-element>
-            <div id="outlet"></div>
+            <vaadin-router .routes=${routes}> </vaadin-router>
         `;
-    }
-
-    firstUpdated() {
-        const router = new Router(
-            this.shadowRoot?.querySelector('#outlet')
-        );
-        router.setRoutes([
-            { path: '/app', component: 'main-page' },
-            { path: '/app/profile/:userid', component: 'user-profile' },
-            { path: '(.*)', redirect: '/app/' }
-        ]);
     }
 }
 

@@ -30,6 +30,13 @@ app.get("/api/profiles/:userid", (req: Request, res: Response) => {
     .catch((err) => res.status(404).end());
 });
 
+app.get("/api/profiles", (req: Request, res: Response) => {
+  profiles
+    .index()
+    .then((profiles) => res.json(profiles))
+    .catch((err) => res.status(404).end());
+});
+
 app.post("/api/profiles", (req: Request, res: Response) => {
   const newProfile = req.body;
   profiles
@@ -61,8 +68,6 @@ app.delete("/api/users", (req: Request, res: Response) => {
         .then(() => res.status(204).end())
         .catch((err) => res.status(404).end());
 });
-
-
 
 app.post("/api/register", (req: Request, res: Response) => {
   const { username, password }: { username: string; password: string } =

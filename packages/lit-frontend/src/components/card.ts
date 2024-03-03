@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
-import { Restaurant } from '../src/models/restaurant';
+import { Restaurant } from 'ts-models';
 
 class Card extends LitElement {
   @property({ type: Object }) restaurant?: Restaurant;
@@ -28,7 +28,6 @@ class Card extends LitElement {
     border-radius: 8px;
     background-color: var(--card-background-color-dark);
     min-height: 200px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
 
   .name, .ratings, .delivery, .price-range, .food-type {
@@ -43,8 +42,8 @@ class Card extends LitElement {
   }
 
   .photo {
-    width: 25%;
-    height: 25%;
+    width: 75%;
+    height: 75%;
     border-radius: 4px;
     margin-bottom: 8px;
   }

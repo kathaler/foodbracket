@@ -38,11 +38,8 @@ class UserPanel extends LitElement {
       height: 2px;
       background-color: var(--secondary-color);
     }
-    body.dark .horizontal-line {
-      background-color: var(--secondary-color-dark);
-    }
-    body.light .horizontal-line {
-      background-color: var(--secondary-color-light);
+    .horizontal-line {
+      background-color: var(--secondary-color);
     }
   `;
 
@@ -50,12 +47,12 @@ class UserPanel extends LitElement {
     return html`
             <div class="header"> 
                 <img src=${this.avatar} />
-                <h2><slot name="name">John Doe</h2>
+                <h2 name="name">John Doe</h2>
             </div>
-            <div class="menu">
+            <div class="menu"></div>
             <div class="horizontal-line"></div>
             <ul>
-                <li><a href="profile.html" class="button boxed">Profile</a></li>
+                <li><a href="./profile/karl" class="button boxed">Profile</a></li>
                 <li><a href="preferences.html" class="button boxed">Preferences</a></li>
                 <li>Logout</li>
             </ul>

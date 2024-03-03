@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { connect } from "./mongoConnect";
 import profiles from "./services/profiles";
-import { Profile } from "./models/profile";
+import { Profile } from "ts-models";
 import { generateAccessToken } from "./auth";
 import credentials from "./services/credentials";
 
@@ -27,6 +27,13 @@ app.get("/api/profiles/:userid", (req: Request, res: Response) => {
   profiles
     .get(userid)
     .then((profile: Profile) => res.json(profile))
+    .catch((err) => res.status(404).end());
+});
+
+app.get("/api/profiles", (req: Request, res: Response) => {
+  profiles
+    .index()
+    .then((profiles) => res.json(profiles))
     .catch((err) => res.status(404).end());
 });
 
@@ -61,8 +68,6 @@ app.delete("/api/users", (req: Request, res: Response) => {
         .then(() => res.status(204).end())
         .catch((err) => res.status(404).end());
 });
-
-
 
 app.post("/api/register", (req: Request, res: Response) => {
   const { username, password }: { username: string; password: string } =

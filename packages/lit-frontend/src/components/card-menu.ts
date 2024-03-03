@@ -1,6 +1,7 @@
 import { html, css, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
-import { Restaurant } from "../src/models/restaurant";
+import { Restaurant } from "ts-models";
+import "./card.ts";
 
 class CardMenu extends LitElement {
   @property()
@@ -52,7 +53,6 @@ class CardMenu extends LitElement {
       }
 
       if (filters.priceRange !== 'any') {
-        console.log(filters.priceRange);
         matchesPriceRange = restaurant.priceRange === filters.priceRange;
       }
 
@@ -77,7 +77,6 @@ class CardMenu extends LitElement {
   }
 
   handlePreferencesUpdated(event: CustomEvent) {
-    console.log('Preferences updated', event.detail);
     const {delivery, priceRange} = event.detail;
     this.filterRestaurants({delivery, priceRange});
   }

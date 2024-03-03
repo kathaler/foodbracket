@@ -1,10 +1,10 @@
-const SERVER_ROOT = window.location.origin;
+const SERVER_ROOT = 'http://localhost:3000';
 const API_PATH = "/api";
 const TOKEN_KEY = "JWT_AUTH_TOKEN";
 
 export class APIUser {
   authenticated = false;
-  username = "fellow_traveler";
+  username = "karl";
   signOut = () => {};
 
   static _theUser = new APIUser();
@@ -20,6 +20,10 @@ export class APIUser {
 
     return anon;
   }
+}
+
+export class TestUser {
+  username = "test";
 }
 
 export class AuthenticatedUser extends APIUser {

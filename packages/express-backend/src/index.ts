@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { connect } from "./mongoConnect";
 import profiles from "./services/profiles";
-import { Profile } from "./models/profile";
+import { Profile } from "ts-models";
 import { generateAccessToken } from "./auth";
 import credentials from "./services/credentials";
 

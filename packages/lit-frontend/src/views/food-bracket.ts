@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import '../components/header.ts';
 import './main-page.ts';
 import '../components/vaadin-router.ts';

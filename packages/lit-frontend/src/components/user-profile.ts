@@ -1,28 +1,15 @@
-import { LitElement, html, css, render } from "lit";
-import { Profile } from "../models/profile";
-import { property, state } from "lit/decorators.js";
-import { serverPath } from "../rest";
+import { html, css } from "lit";
+import { Profile } from "ts-models";
+import { property } from "lit/decorators.js";
+import * as App from '../app.ts';
 
-export class UserProfileElement extends LitElement {
-  @property()
-  path: string = "";
+export class UserProfileElement extends App.View {
+  @property({ attribute: false})
+  using?: Profile;
 
-  @state()
-  profile?: Profile;
-
-  connectedCallback() {
-    if (this.path) {
-      console.log("fetching data");
-      this._fetchData(this.path);
-    }
-    super.connectedCallback();
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === "path" && oldValue !== newValue && oldValue) {
-      this._fetchData(newValue);
-    }
-    super.attributeChangedCallback(name, oldValue, newValue);
+  get profile() {
+    console.log("GETTING PROFILE", this.using);
+    return this.using || ({} as Profile);
   }
 
   static styles = css`
@@ -103,11 +90,11 @@ export class UserProfileElement extends LitElement {
   `;
 
   render() {
-    const { userid, name, nickname, zip, city, restaurants } = (this.profile ||
+    const { userid, name, nickname, zip, city } = (this.profile ||
       {}) as Profile;
     return html`
       <section>
-        <a href="./${userid}/edit">Edit</a>
+        <a href="?edit=t">Edit</a>
         <h1>${name}</h1>
         <dl>
           <div class="profile-item">
@@ -130,25 +117,12 @@ export class UserProfileElement extends LitElement {
       </section>
     `;
   }
-
-  _fetchData(path: string) {
-    fetch(serverPath(path))
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        return null;
-      })
-      .then((json: unknown) => {
-        if (json) this.profile = json as Profile;
-      });
-  }
 }
 
 export class UserProfileEditElement extends UserProfileElement {
   render() {
     const profile = (this.profile || {}) as Profile;
-    const { userid, name, nickname, zip, city, restaurants } = profile;
+    const { userid, name, nickname, zip, city } = profile;
 
     console.log("Rendering form", this.profile);
     return html`
@@ -199,26 +173,39 @@ export class UserProfileEditElement extends UserProfileElement {
     const formData = new FormData(form);
     const entries = formData.entries();
     const json = Object.fromEntries(entries);
+    console.log("Form data", json);
     this._putData(json);
   }
 
   _putData(data: unknown) {
-    fetch(serverPath(this.path), {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+    const msg = {
+      type: "ProfileSaved",
+      userid: this.profile?.userid,
+      profile: data as Profile,
+    }
+    const ev = new CustomEvent("mvu:message", {
+      bubbles: true,
+      composed: true,
+      detail: msg,
     })
-      .then((response) => {
-        if (response.status === 200) return response.json();
-      })
-      .then((json: unknown) => {
-        if (json) this.profile = json as Profile;
-      })
-      .catch((err) => {
-        console.log("Failed to PUT form data", err);
-      });
+    this.dispatchEvent(ev);
+
+    // fetch(serverPath(this.path), {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200) return response.json();
+    //   })
+    //   .then((json: unknown) => {
+    //     if (json) this.profile = json as Profile;
+    //   })
+    //   .catch((err) => {
+    //     console.log("Failed to PUT form data", err);
+    //   });
   }
 }
 

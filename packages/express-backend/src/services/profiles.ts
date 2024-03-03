@@ -1,7 +1,8 @@
 import ProfileModel from "../models/mongo/profile";
-import { Profile } from "../models/profile";
+import { Profile } from "ts-models";
 
 function index(): Promise<Profile[]> {
+    console.log("here");
     return ProfileModel.find();
 }
 

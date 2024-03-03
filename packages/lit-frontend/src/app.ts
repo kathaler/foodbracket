@@ -3,25 +3,30 @@ import { consume, createContext, provide } from "@lit/context";
 import { Profile } from "ts-models";
 import * as MVU from "./mvu";
 import { MsgType } from "./mvu";
-import { AuthenticatedUser, APIUser } from "./rest";
+import { TestUser } from "./rest";
+
 
 export interface Model {
-  user: APIUser;
+  user: TestUser;
   profile?: Profile;
 }
 
 export const context = createContext<Model>("FoodBracketModel");
 
 export const init: Model = {
-  user: new APIUser(),
+  user: new TestUser(),
 };
 
-export interface ProfileSaved extends MsgType<"ProfileSaved"> {
+export interface ProfileSelected extends MsgType<"ProfileSelected"> {
   userid: string;
+}
+
+export interface ProfileSaved extends MsgType<"ProfileSaved"> {
+  userid: string
   profile: Profile;
 }
 
-export type Message = ProfileSaved;
+export type Message = ProfileSaved | ProfileSelected;
 
 export class Main
   extends MVU.Main<Model, Message>

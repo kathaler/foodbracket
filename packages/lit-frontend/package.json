@@ -2,11 +2,12 @@
   "name": "lit-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "app/index.html",
+  "main": "dist/index.html",
+  "type": "module",
   "scripts": {
     "dev": "npx vite",
     "sandbox": "npx vite --root sandbox",
-    "build": "npx tsc && npx vite build"
+    "build": "npx tsc && npx vite build --minify false"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "vite": "^5.0.12"
   },
   "dependencies": {
+    "@lit/context": "^1.1.0",
     "@vaadin/router": "^1.7.5",
     "lit": "^3.1.2",
     "ts-models": "^1.0.0"

@@ -1,7 +1,9 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import "./card.ts";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 class CardMenu extends LitElement {
   @property()
@@ -12,8 +14,9 @@ class CardMenu extends LitElement {
   fRestaurants?: Restaurant[];
 
   render() {
-    const rows = this.fRestaurants || [];
+    const rows = (!this.fRestaurants ? this.restaurants : this.fRestaurants) || [];
     return html`
+
       <div class="restaurant-cards">
         ${rows.map(restaurant => html`
           <card-element>
@@ -32,7 +35,10 @@ class CardMenu extends LitElement {
     `;
   }
 
-  static styles = css`
+  static styles = [
+  unsafeCSS(pageCSS),
+  unsafeCSS(resetCSS),
+  css`
     .restaurant-cards {
       display: flex;
       flex-wrap: wrap;
@@ -41,18 +47,22 @@ class CardMenu extends LitElement {
       height: 80vh;
       gap: 16px;
     }
-  `;
+  `];
 
-  filterRestaurants(filters: { delivery: boolean; priceRange: string; }) {
+  filterRestaurants(filters: { delivery: boolean; priceRange: string; foodType: string}) {
     const filteredRestaurants = this.restaurants?.filter(restaurant => {
       let matchesDelivery = true;
       let matchesPriceRange = true;
 
-      if (filters.delivery) {
+      if (filters.delivery !== false) {
         matchesDelivery = restaurant.delivery === filters.delivery;
       }
 
       if (filters.priceRange !== 'any') {
+        matchesPriceRange = restaurant.priceRange === filters.priceRange;
+      }
+
+      if (filters.foodType !== 'any') {
         matchesPriceRange = restaurant.priceRange === filters.priceRange;
       }
 
@@ -64,21 +74,29 @@ class CardMenu extends LitElement {
   }
 
   connectedCallback() {
-    if (this.src) {
-      this._fetchData(this.src);
-    }
     super.connectedCallback();
-    document.addEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+    document.addEventListener('location-selected', this.handleLocationSelected.bind(this) as EventListener);
+    document.addEventListener('filter-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
   }
 
   disconnectedCallback() {
-    document.removeEventListener('preferences-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
+    document.removeEventListener('location-selected', this.handleLocationSelected.bind(this) as EventListener);
+    document.removeEventListener('filter-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
     super.disconnectedCallback();
   }
 
+  handleLocationSelected(event: CustomEvent) {
+    // TODO - fetch data based on location
+    const {location} = event.detail;
+    if (this.src) {
+      this._fetchData(this.src);
+    }
+    this.filterRestaurants({delivery: false, priceRange: 'any', foodType: 'any'});
+  }
+
   handlePreferencesUpdated(event: CustomEvent) {
-    const {delivery, priceRange} = event.detail;
-    this.filterRestaurants({delivery, priceRange});
+    const {delivery, priceRange, foodType} = event.detail;
+    this.filterRestaurants({delivery, priceRange, foodType});
   }
 
   _fetchData(src: string) {

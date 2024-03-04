@@ -1,10 +1,10 @@
 import { LitElement, html, css } from "lit";
 import { state } from "lit/decorators.js";
+import "./preferences-filter";
 
 class PreferencesForm extends LitElement {
   @state() private location: string = "";
-  @state() private delivery: boolean = false;
-  @state() private priceRange: string = "any";
+  @state() private submitted: boolean = false;
 
   static styles = css`
     #location-prompt {
@@ -12,7 +12,7 @@ class PreferencesForm extends LitElement {
       gap: 20px;
     }
 
-    .preferencesForm {
+    .locationForm {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -23,65 +23,60 @@ class PreferencesForm extends LitElement {
   `;
 
   render() {
+    
     return html`
-      <form class="preferencesForm" 
-      @submit=${this._handleSubmit}>
-        <div id="location-prompt">
-          <label for="location">Enter Your Location:</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            .value=${this.location}
-            @input=${(e: { target: { value: string } }) =>
-              (this.location = e.target.value)}
-            required
-            placeholder="Zip code or City"
-          />
-        </div>
-
-        <label for="delivery">Offers Delivery:</label>
-        <input
-          type="checkbox"
-          id="delivery"
-          name="delivery"
-          .checked=${this.delivery}
-          @change=${(e: { target: { checked: boolean } }) =>
-            (this.delivery = e.target.checked)}
-        />
-
-        <label for="priceRange">Price Range:</label>
-        <select
-          id="priceRange"
-          name="priceRange"
-          .value=${this.priceRange}
-          @change=${(e: { target: { value: string } }) =>
-            (this.priceRange = e.target.value)}
-        >
-          <option value="any">Any</option>
-          <option value="$">$</option>
-          <option value="$$">$$</option>
-          <option value="$$$">$$$</option>
-        </select>
-
-        <input type="submit" value="Save Preferences" />
-      </form>
-    `;
+    <div class="preferencesForm">
+    ${this.submitted 
+      ? html`
+          <h1>${this.location}</h1>
+          <preferences-filter></preferences-filter>
+      `
+      : html`
+          <form class="locationForm" 
+          @submit=${this._handleSubmit}>
+            <div id="location-prompt">
+              <label for="location">Enter Your Location:</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                .value=${this.location}
+                @input=${(e: { target: { value: string } }) =>
+                  (this.location = e.target.value)}
+                required
+                placeholder="Zip code or City"
+              />
+            </div>
+            <input type="submit" value="Find Restaurants" />
+          </form>
+    `}
+     </div>`;
   }
 
   _handleSubmit(event: Event) {
     event.preventDefault();
+    this.submitted = true;
+    // this.dispatchEvent(
+    //   new CustomEvent("preferences-updated", {
+    //     detail: {
+    //       location: this.location,
+    //       delivery: 'any',
+    //       priceRange: 'any',
+    //     },
+    //     bubbles: true,
+    //     composed: true,
+    //   })
+    // );
+
     this.dispatchEvent(
-      new CustomEvent("preferences-updated", {
+      new CustomEvent("location-selected", {
         detail: {
           location: this.location,
-          delivery: this.delivery,
-          priceRange: this.priceRange,
         },
         bubbles: true,
         composed: true,
       })
-    );
+    )
   }
 }
 

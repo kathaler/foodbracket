@@ -2,10 +2,11 @@ import { html, css, LitElement, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import "./card.ts";
+import * as App from "../app";
 import resetCSS from "/src/styles/reset.css?inline";
 import pageCSS from "/src/styles/page.css?inline";
 
-class CardMenu extends LitElement {
+class CardMenu extends App.View {
   @property()
   src: string = "";
 
@@ -27,8 +28,7 @@ class CardMenu extends LitElement {
               ${restaurant.ratings}
             </div>
             <div slot="delivery">Delivery: ${restaurant.delivery ? 'Yes' : 'No'}</div>
-            <div slot="price-range">Price Range: ${restaurant.priceRange}</div>
-            <div slot="food-type">Food Type: ${restaurant.foodType}</div>
+            <div slot="price-range">Price Range: ${restaurant.price}</div>
           </card-element>
         `)}
       </div>
@@ -59,11 +59,7 @@ class CardMenu extends LitElement {
       }
 
       if (filters.priceRange !== 'any') {
-        matchesPriceRange = restaurant.priceRange === filters.priceRange;
-      }
-
-      if (filters.foodType !== 'any') {
-        matchesPriceRange = restaurant.priceRange === filters.priceRange;
+        matchesPriceRange = restaurant.price === filters.priceRange;
       }
 
       return matchesDelivery && matchesPriceRange;
@@ -91,6 +87,11 @@ class CardMenu extends LitElement {
     if (this.src) {
       this._fetchData(this.src);
     }
+    console.log('in handleLocationSelected', location);
+    this.dispatchMessage({      
+      type: "RestaurantsLoaded",
+      location: location
+    })
     this.filterRestaurants({delivery: false, priceRange: 'any', foodType: 'any'});
   }
 

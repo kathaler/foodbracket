@@ -8,7 +8,6 @@ export class UserProfileElement extends App.View {
   using?: Profile;
 
   get profile() {
-    console.log("GETTING PROFILE", this.using);
     return this.using || ({} as Profile);
   }
 
@@ -173,7 +172,6 @@ export class UserProfileEditElement extends UserProfileElement {
     const formData = new FormData(form);
     const entries = formData.entries();
     const json = Object.fromEntries(entries);
-    console.log("Form data", json);
     this._putData(json);
   }
 
@@ -189,23 +187,6 @@ export class UserProfileEditElement extends UserProfileElement {
       detail: msg,
     })
     this.dispatchEvent(ev);
-
-    // fetch(serverPath(this.path), {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((response) => {
-    //     if (response.status === 200) return response.json();
-    //   })
-    //   .then((json: unknown) => {
-    //     if (json) this.profile = json as Profile;
-    //   })
-    //   .catch((err) => {
-    //     console.log("Failed to PUT form data", err);
-    //   });
   }
 }
 

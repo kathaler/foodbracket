@@ -36,28 +36,6 @@ class PreferencesFilter extends LitElement {
               <option value="high">High</option>
             </select>
           </div>
-          <div class="filter-group">
-            <label for="food-type">Food Type:</label>
-            <select
-              id="food-type"
-              name="food-type"
-              .value=${this.foodType}
-              @change=${this._handleChange}
-            >
-              <option value="any">Any</option>
-              <option value="american">American</option>
-              <option value="mexican">Mexican</option>
-              <option value="italian">Italian</option>
-              <option value="chinese">Chinese</option>
-              <option value="japanese">Japanese</option>
-              <option value="indian">Indian</option>
-              <option value="thai">Thai</option>
-              <option value="greek">Greek</option>
-              <option value="french">French</option>
-              <option value="german">German</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
         </form>
       </div>
     `;
@@ -72,8 +50,6 @@ class PreferencesFilter extends LitElement {
         this.delivery = value as boolean;
     } else if (name === 'price-range') {
         this.priceRange = value.toString();
-    } else if (name === 'food-type') {
-        this.foodType = value.toString(); 
     }
   
     this.dispatchEvent(

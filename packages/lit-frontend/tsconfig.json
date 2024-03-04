@@ -20,5 +20,5 @@
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true
     },
-    "include": ["src", "sandbox", "../ts-models/src/restaurant.ts"]
+    "include": ["src"]
   }

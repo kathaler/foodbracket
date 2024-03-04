@@ -1,7 +1,9 @@
-import { html, css, LitElement } from "lit";
+import { html, css, LitElement, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import "./card.ts";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 class CardMenu extends LitElement {
   @property()
@@ -33,7 +35,10 @@ class CardMenu extends LitElement {
     `;
   }
 
-  static styles = css`
+  static styles = [
+  unsafeCSS(pageCSS),
+  unsafeCSS(resetCSS),
+  css`
     .restaurant-cards {
       display: flex;
       flex-wrap: wrap;
@@ -42,7 +47,7 @@ class CardMenu extends LitElement {
       height: 80vh;
       gap: 16px;
     }
-  `;
+  `];
 
   filterRestaurants(filters: { delivery: boolean; priceRange: string; foodType: string}) {
     const filteredRestaurants = this.restaurants?.filter(restaurant => {

@@ -8,6 +8,7 @@ import * as App from "../app";
 class Card extends App.View {
   @property({ type: Object }) restaurant?: Restaurant;
   @property({ type: Boolean, reflect: true }) clicked = false;
+  @property({ type: Boolean }) canAdd = true;
 
   render() {
     if (this.restaurant) {
@@ -108,11 +109,13 @@ class Card extends App.View {
   ];
 
   _handleClick() {
-    this.clicked = !this.clicked;
-    console.log("clicked");
-
+    if (this.canAdd && !this.clicked) {
+      this.clicked = !this.clicked;
+    } 
+    else if (this.clicked) {
+      this.clicked = !this.clicked;
+    }
     if (this.restaurant) {
-      console.log("dispatching message");
       this.dispatchMessage({
         type: "CardClicked",
         restaurant: this.restaurant,

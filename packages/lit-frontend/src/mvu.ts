@@ -40,7 +40,6 @@ export class Main< M, Msg extends TypedMessage > extends LitElement {
       "mvu:message",
       (ev: Event) => {
         const msg = (ev as CustomEvent).detail as Msg;
-        console.log("Got message: ", msg);
         this.receive(msg);
       }
     );
@@ -110,7 +109,6 @@ export type Assignments<M> = {
 };
 
 export function updateProps<M>(props: Assignments<M>) {
-  console.log("Updating props:", props);
   return (m: M) => Object.assign({}, m, props) as M;
 }
 

@@ -19,6 +19,11 @@ class CardMenu extends App.View {
     return this.getFromModel("restaurants") as Restaurants;
   }
 
+  @property()
+  get selected() {
+    return this.getFromModel("selected") as Restaurant[];
+  }
+
   render() {
     let rows = Array.isArray(this.yelp_restaurants.restaurants) 
     ? this.yelp_restaurants.restaurants : [];
@@ -33,7 +38,9 @@ class CardMenu extends App.View {
     return html`
       <div class="restaurant-cards">
         ${(rows).map((restaurant: Restaurant) => html`
-          <card-element .restaurant=${restaurant}>
+          <card-element 
+            .restaurant=${restaurant}
+            .canAdd=${this.selected.length < 8}>
           </card-element>
         `)}
       </div>

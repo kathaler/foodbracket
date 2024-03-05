@@ -45,7 +45,6 @@ export class ProfilePageElement extends App.View {
           oldValue !== newValue &&
           newValue
         ) {
-          console.log("Profile Page:", newValue);
           this.dispatchMessage({
             type: "ProfileSelected",
             userid: newValue

@@ -34,6 +34,7 @@ class Card extends LitElement {
         background-color: var(--card-background-color);
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         min-height: 200px;
+        min-width: 190px;
       }
 
       .name,
@@ -52,8 +53,8 @@ class Card extends LitElement {
       }
 
       .photo {
-        width: 75%;
-        height: 75%;
+        width: 60%;
+        height: 60%;
         border-radius: 4px;
         margin-bottom: 8px;
       }

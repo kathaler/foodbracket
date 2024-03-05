@@ -1,8 +1,8 @@
-import { Credential } from "../models/credential";
+import { Credential } from "ts-models";
 import CredentialModel from "../models/mongo/credential";
 import bcrypt from "bcrypt";
 
-export function create(username: string, password: string) {
+function create(username: string, password: string) {
   return new Promise<Credential>((resolve, reject) => {
     if (!username || !password) {
       reject("must provide username and password");
@@ -29,7 +29,7 @@ export function create(username: string, password: string) {
   });
 }
 
-export function verify(username: string, password: string): Promise<String> {
+function verify(username: string, password: string): Promise<String> {
   return new Promise<String>((resolve, reject) => {
     CredentialModel
       .find({ username })

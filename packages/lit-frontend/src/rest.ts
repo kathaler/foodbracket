@@ -26,6 +26,11 @@ export class TestUser {
   username = "test";
 }
 
+export class EmptyRestaurants {
+  location = "test";
+  restaurants = [];
+}
+
 export class AuthenticatedUser extends APIUser {
   token: string | undefined;
 

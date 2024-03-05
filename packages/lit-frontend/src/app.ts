@@ -1,20 +1,22 @@
 import { property, state } from "lit/decorators.js";
 import { consume, createContext, provide } from "@lit/context";
-import { Profile } from "ts-models";
+import { Profile, Restaurants } from "ts-models";
 import * as MVU from "./mvu";
 import { MsgType } from "./mvu";
-import { TestUser } from "./rest";
+import { TestUser, EmptyRestaurants } from "./rest";
 
 
 export interface Model {
   user: TestUser;
   profile?: Profile;
+  restaurants?: Restaurants;
 }
 
 export const context = createContext<Model>("FoodBracketModel");
 
 export const init: Model = {
   user: new TestUser(),
+  restaurants: new EmptyRestaurants(),
 };
 
 export interface ProfileSelected extends MsgType<"ProfileSelected"> {
@@ -26,7 +28,11 @@ export interface ProfileSaved extends MsgType<"ProfileSaved"> {
   profile: Profile;
 }
 
-export type Message = ProfileSaved | ProfileSelected;
+export interface LocationSubmitted extends MsgType<"LocationSubmitted"> {
+  location: string;
+}
+
+export type Message = ProfileSaved | ProfileSelected | LocationSubmitted;
 
 export class Main
   extends MVU.Main<Model, Message>

@@ -20,8 +20,13 @@ class CardMenu extends App.View {
   }
 
   render() {
-    const rows = Array.isArray(this.yelp_restaurants.restaurants) 
+    let rows = Array.isArray(this.yelp_restaurants.restaurants) 
     ? this.yelp_restaurants.restaurants : [];
+
+    if (this.fRestaurants) {
+      rows = this.fRestaurants;
+    }
+
     if (rows.length === 0) {
       return html`<div>Loading...</div>`;
     }
@@ -57,8 +62,9 @@ class CardMenu extends App.View {
     }
   `];
 
-  filterRestaurants(filters: { delivery: boolean; priceRange: string; foodType: string}) {
-    let newRestaurants = Array.isArray(this.yelp_restaurants) ? this.yelp_restaurants : [];
+  filterRestaurants(filters: { delivery: boolean; priceRange: string;}) {
+    let newRestaurants = Array.isArray(this.yelp_restaurants.restaurants) ?
+     this.yelp_restaurants.restaurants : [];
     const filteredRestaurants = newRestaurants?.filter(restaurant => {
       let matchesDelivery = true;
       let matchesPriceRange = true;
@@ -80,44 +86,17 @@ class CardMenu extends App.View {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('location-selected', this.handleLocationSelected.bind(this) as EventListener);
     document.addEventListener('filter-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
   }
 
   disconnectedCallback() {
-    document.removeEventListener('location-selected', this.handleLocationSelected.bind(this) as EventListener);
     document.removeEventListener('filter-updated', this.handlePreferencesUpdated.bind(this) as EventListener);
     super.disconnectedCallback();
   }
 
-  handleLocationSelected(event: CustomEvent) {
-    const {location} = event.detail;
-    if (this.src) {
-      this._fetchData(this.src);
-    }
-    this.filterRestaurants({delivery: false, priceRange: 'any', foodType: 'any'});
-  }
-
   handlePreferencesUpdated(event: CustomEvent) {
-    const {delivery, priceRange, foodType} = event.detail;
-    this.filterRestaurants({delivery, priceRange, foodType});
-  }
-
-  _fetchData(src: string) {
-    fetch(src)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        return null;
-      })
-      .then((data) => {
-        if (data && Array.isArray(data.restaurants)) {
-          this.restaurants = data.restaurants;
-        } else {
-          throw new Error("Data format is incorrect");
-        }
-      });
+    const {delivery, priceRange} = event.detail;
+    this.filterRestaurants({delivery, priceRange});
   }
 }
 

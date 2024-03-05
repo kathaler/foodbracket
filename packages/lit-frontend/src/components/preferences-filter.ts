@@ -4,7 +4,6 @@ import { state } from "lit/decorators.js";
 class PreferencesFilter extends LitElement {
   @state() private delivery: boolean = false;
   @state() private priceRange: string = "any";
-  @state() private foodType: string = "any";
   // @state() private reviews: number = -1;
   // @state() private categories: string[] = [];
 
@@ -31,9 +30,9 @@ class PreferencesFilter extends LitElement {
               @change=${this._handleChange}
             >
               <option value="any">Any</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
+              <option value="low">$</option>
+              <option value="medium">$$</option>
+              <option value="high">$$$</option>
             </select>
           </div>
         </form>
@@ -57,7 +56,6 @@ class PreferencesFilter extends LitElement {
         detail: {
           delivery: this.delivery,
           priceRange: this.priceRange,
-          foodType: this.foodType,
         },
         bubbles: true,
         composed: true,

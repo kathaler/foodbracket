@@ -7,7 +7,7 @@ function searchYelp(location: string): Promise<Restaurants> {
   return fetch(
     `${API_URL}/businesses/search?location=${encodeURIComponent(
       location
-    )}&is_closed=false&term=restaurant&radius=20000&categories=&sort_by=best_match&limit=30`,
+    )}&is_closed=false&term=restaurant&radius=20000&categories=&sort_by=best_match&limit=50`,
     {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,

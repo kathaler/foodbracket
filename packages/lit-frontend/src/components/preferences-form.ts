@@ -62,16 +62,6 @@ class PreferencesForm extends App.View {
       type: "LocationSubmitted",
       location: this.location
     })
-
-    this.dispatchEvent(
-      new CustomEvent("location-selected", {
-        detail: {
-          location: this.location,
-        },
-        bubbles: true,
-        composed: true,
-      })
-    )
   }
 }
 

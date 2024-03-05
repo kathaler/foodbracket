@@ -1,8 +1,9 @@
 import { LitElement, html, css } from "lit";
 import { state } from "lit/decorators.js";
 import "./preferences-filter";
+import * as App from "../app";
 
-class PreferencesForm extends LitElement {
+class PreferencesForm extends App.View {
   @state() private location: string = "";
   @state() private submitted: boolean = false;
 
@@ -56,6 +57,11 @@ class PreferencesForm extends LitElement {
   _handleSubmit(event: Event) {
     event.preventDefault();
     this.submitted = true;
+
+    this.dispatchMessage({      
+      type: "LocationSubmitted",
+      location: this.location
+    })
 
     this.dispatchEvent(
       new CustomEvent("location-selected", {

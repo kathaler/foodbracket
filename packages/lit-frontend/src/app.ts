@@ -3,7 +3,7 @@ import { consume, createContext, provide } from "@lit/context";
 import { Profile, Restaurants } from "ts-models";
 import * as MVU from "./mvu";
 import { MsgType } from "./mvu";
-import { TestUser } from "./rest";
+import { TestUser, EmptyRestaurants } from "./rest";
 
 
 export interface Model {
@@ -16,6 +16,7 @@ export const context = createContext<Model>("FoodBracketModel");
 
 export const init: Model = {
   user: new TestUser(),
+  restaurants: new EmptyRestaurants(),
 };
 
 export interface ProfileSelected extends MsgType<"ProfileSelected"> {
@@ -27,11 +28,11 @@ export interface ProfileSaved extends MsgType<"ProfileSaved"> {
   profile: Profile;
 }
 
-export interface RestaurantsLoaded extends MsgType<"RestaurantsLoaded"> {
+export interface LocationSubmitted extends MsgType<"LocationSubmitted"> {
   location: string;
 }
 
-export type Message = ProfileSaved | ProfileSelected | RestaurantsLoaded;
+export type Message = ProfileSaved | ProfileSelected | LocationSubmitted;
 
 export class Main
   extends MVU.Main<Model, Message>

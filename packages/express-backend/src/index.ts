@@ -142,7 +142,6 @@ app.post("/api/login", (req: Request, res: Response) => {
 
 app.get("/api/restaurants", (req: Request, res: Response) => {
   const { location } = req.query;
-  console.log("in the backend index.ts api call ", location);  
   searchYelp(location as string)
     .then((restaurants: Restaurants) => res.json(restaurants))
     .catch((err) => res.status(404).end());

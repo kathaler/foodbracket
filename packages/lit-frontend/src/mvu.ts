@@ -54,11 +54,9 @@ export class Main< M, Msg extends TypedMessage > extends LitElement {
       // result is a promise
       promise.then((mapFn: ModelMap<M>) => {
         const next = mapFn(this.getModel());
-        console.log("Updating model in Promise:", next, "Current model:", this.getModel());
         this.setModel(next);
       });
     } else {
-      console.log("Updating model:", next);
       this.setModel(next as M);
     }
   }

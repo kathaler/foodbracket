@@ -1,6 +1,6 @@
-import { html, css, LitElement, unsafeCSS } from "lit";
+import { html, css, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import { Restaurant } from "ts-models";
+import { Restaurant, Restaurants } from "ts-models";
 import "./card.ts";
 import * as App from "../app";
 import resetCSS from "/src/styles/reset.css?inline";
@@ -14,12 +14,20 @@ class CardMenu extends App.View {
   restaurants?: Restaurant[];
   fRestaurants?: Restaurant[];
 
-  render() {
-    const rows = (!this.fRestaurants ? this.restaurants : this.fRestaurants) || [];
-    return html`
+  @property()
+  get yelp_restaurants() {
+    return this.getFromModel("restaurants") as Restaurants;
+  }
 
+  render() {
+    const rows = Array.isArray(this.yelp_restaurants.restaurants) 
+    ? this.yelp_restaurants.restaurants : [];
+    if (rows.length === 0) {
+      return html`<div>Loading...</div>`;
+    }
+    return html`
       <div class="restaurant-cards">
-        ${rows.map(restaurant => html`
+        ${(rows).map((restaurant: Restaurant) => html`
           <card-element>
             <div slot="name">${restaurant.name}</div>
             <img slot="photo" class="photo" src="${restaurant.photo}" />
@@ -50,7 +58,8 @@ class CardMenu extends App.View {
   `];
 
   filterRestaurants(filters: { delivery: boolean; priceRange: string; foodType: string}) {
-    const filteredRestaurants = this.restaurants?.filter(restaurant => {
+    let newRestaurants = Array.isArray(this.yelp_restaurants) ? this.yelp_restaurants : [];
+    const filteredRestaurants = newRestaurants?.filter(restaurant => {
       let matchesDelivery = true;
       let matchesPriceRange = true;
 
@@ -82,16 +91,10 @@ class CardMenu extends App.View {
   }
 
   handleLocationSelected(event: CustomEvent) {
-    // TODO - fetch data based on location
     const {location} = event.detail;
     if (this.src) {
       this._fetchData(this.src);
     }
-    console.log('in handleLocationSelected', location);
-    this.dispatchMessage({      
-      type: "RestaurantsLoaded",
-      location: location
-    })
     this.filterRestaurants({delivery: false, priceRange: 'any', foodType: 'any'});
   }
 

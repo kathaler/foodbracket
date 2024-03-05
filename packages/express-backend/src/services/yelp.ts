@@ -4,7 +4,6 @@ const ACCESS_TOKEN = process.env.YELP_ACCESS_TOKEN;
 const API_URL = "https://api.yelp.com/v3";
 
 function searchYelp(location: string): Promise<Restaurants> {
-  console.log("searching yelp for", location);
   return fetch(
     `${API_URL}/businesses/search?location=${encodeURIComponent(
       location
@@ -20,7 +19,6 @@ function searchYelp(location: string): Promise<Restaurants> {
       if (response.status === 200) return response.json();
     })
     .then((data) => {
-        console.log("in the searchYelp function", data);
       return {
         location,
         restaurants: data.businesses.map((business: any) => {

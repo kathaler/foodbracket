@@ -51,23 +51,23 @@ dispatch.addMessage("ProfileSaved", (msg: App.Message) => {
     );
 });
 
-dispatch.addMessage("RestaurantsLoaded", (msg: App.Message) => {
-  const { location } = msg as App.RestaurantsLoaded;
-  console.log("IN THE MESSAGE", location);
+dispatch.addMessage("LocationSubmitted", (msg: App.Message) => {
+  const { location } = msg as App.LocationSubmitted;
+  
   return new APIRequest()
     .get(`/restaurants?location=${location}`)
     .then((response: Response) => {
       if (response.status === 200) {
         return response.json();
-      } else return undefined;
+      } 
+      return undefined;
     })
     .then((json: unknown) => {
       if (json) {
-        console.log("Restaurants:", json);
         return json as Restaurants;
       }
     })
-    .then((restaurants: Restaurants | undefined) => {
-      restaurants ? App.updateProps({ restaurants }) : App.noUpdate;
-    });
+    .then((restaurants: Restaurants | undefined) => 
+      restaurants ? App.updateProps({ restaurants }) : App.noUpdate
+    );
 });

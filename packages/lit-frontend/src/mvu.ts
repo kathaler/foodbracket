@@ -110,6 +110,7 @@ export type Assignments<M> = {
 };
 
 export function updateProps<M>(props: Assignments<M>) {
+  console.log("Updating props:", props);
   return (m: M) => Object.assign({}, m, props) as M;
 }
 

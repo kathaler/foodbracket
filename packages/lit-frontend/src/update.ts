@@ -1,7 +1,7 @@
 import { APIRequest, JSONRequest } from "./rest";
 import * as App from "./app";
 import { Profile } from "ts-models";
-import { Restaurants } from "ts-models";
+import { Restaurant, Restaurants } from "ts-models";
 
 const dispatch = App.createDispatch();
 export default dispatch.update;
@@ -70,4 +70,21 @@ dispatch.addMessage("LocationSubmitted", (msg: App.Message) => {
     .then((restaurants: Restaurants | undefined) => 
       restaurants ? App.updateProps({ restaurants }) : App.noUpdate
     );
+});
+
+dispatch.addMessage("CardClicked", (msg: App.Message, model: App.Model) => {
+  const {restaurant} = msg as App.CardClicked;
+
+  if ((model.selected as Restaurant[]).includes(restaurant)) {
+    const selected = model.selected.filter((r) => r !== restaurant);
+    return App.updateProps({ selected })(model);
+  }
+
+  if (model.selected.length < 8) {
+    const selected = [...model.selected, restaurant];
+    return App.updateProps({ selected })(model);
+  } else {
+    console.log("Max of 8 restaurants selected. Can't add more.");
+    return App.noUpdate(model);
+  }
 });

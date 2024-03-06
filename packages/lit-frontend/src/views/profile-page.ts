@@ -33,8 +33,6 @@ export class ProfilePageElement extends App.View {
     @property()
     get profile() {
         return this.getFromModel("profile");
-        // const request = new APIRequest();
-        // return request.get(`/profiles/${this.userid}`) as unknown as Promise<Profile>;
     }
 
     attributeChangedCallback(
@@ -47,7 +45,6 @@ export class ProfilePageElement extends App.View {
           oldValue !== newValue &&
           newValue
         ) {
-          console.log("Profile Page:", newValue);
           this.dispatchMessage({
             type: "ProfileSelected",
             userid: newValue

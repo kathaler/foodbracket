@@ -40,7 +40,6 @@ export class Main< M, Msg extends TypedMessage > extends LitElement {
       "mvu:message",
       (ev: Event) => {
         const msg = (ev as CustomEvent).detail as Msg;
-        console.log("Got message: ", msg);
         this.receive(msg);
       }
     );

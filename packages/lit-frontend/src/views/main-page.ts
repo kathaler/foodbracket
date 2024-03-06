@@ -4,14 +4,14 @@ import "../components/card-menu.ts";
 import resetCSS from "/src/styles/reset.css?inline";
 import pageCSS from "/src/styles/page.css?inline";
 import * as App from "../app";
-import { Restaurants } from "ts-models";
+import { Restaurant } from "ts-models";
 import { property } from "lit/decorators.js";
 
 export class MainPageElement extends App.View {
 
   @property()
   get cards_selected() {
-    return this.getFromModel("selected") as Restaurants[];
+    return this.getFromModel("selected") as Restaurant[];
   }
 
   render() {
@@ -26,6 +26,17 @@ export class MainPageElement extends App.View {
               Begin By Selecting Your Preferences
             </h2>
             <preferences-form></preferences-form>
+            <div>
+              <div>
+                ${this.cards_selected.length !== 0 ? html`<h2>Selected Restaurants</h2>` : html``}
+                <ul>
+                  ${this.cards_selected.map(
+                    (restaurant) => html`<li>${restaurant.name}</li>`
+                  )}
+                </ul>
+              </div>
+              ${this.cards_selected.length === 8 ? html`<a href="/app/bracket">View Bracket</a>` : html``}
+            </div>
           </section>
         </div>
         <div class="right">

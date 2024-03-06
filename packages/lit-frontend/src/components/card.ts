@@ -1,5 +1,5 @@
 import { html, css, LitElement, unsafeCSS } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import resetCSS from "/src/styles/reset.css?inline";
 import pageCSS from "/src/styles/page.css?inline";
@@ -110,6 +110,7 @@ class Card extends App.View {
 
   _handleClick() {
     if (this.canAdd && !this.clicked) {
+      console.log("clicked");
       this.clicked = !this.clicked;
     } 
     else if (this.clicked) {

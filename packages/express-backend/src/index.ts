@@ -41,17 +41,16 @@ console.log(`Serving ${frontend} from`, dist);
 
 if (dist) app.use(express.static(dist.toString()));
 
-app.use("/app", (req, res) => {
+// Serve index.html for all non-API requests (Client-Side Routing)
+app.get(/^(?!\/api).*/, (req, res) => {
   if (!indexHtml) {
     res
       .status(404)
-      .send(
-        `Not found; ${frontend} not available, running in ${cwd}`
-      );
+      .send(`Not found; ${frontend} not available, running in ${cwd}`);
   } else {
-    fs.readFile(indexHtml, { encoding: "utf8" }).then((html: any) =>
-      res.send(html)
-    );
+    fs.readFile(indexHtml, { encoding: "utf8" })
+      .then((html) => res.send(html))
+      .catch((err) => res.status(500).send("Error serving the application"));
   }
 });
 

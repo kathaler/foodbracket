@@ -34,13 +34,21 @@ export class HeaderElement extends LitElement {
 
   static styles = css`
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      background-color: var(--secondary-color);
-      color: var(--secondary-color);
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  background-color: var(--secondary-color);
+  color: var(--secondary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000000;
+  width: 100%;
+  border: 5px solid black;
+  box-sizing: border-box;
+}
 
     .header-user {
       color: var(--font-color-default);

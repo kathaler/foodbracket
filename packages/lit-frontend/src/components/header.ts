@@ -7,7 +7,8 @@ export class HeaderElement extends LitElement {
     return html`
       <header>
         <div class="header-left">
-          <span>Food Bracket</span>
+          <span><a href="/app">Food Bracket</a></span>
+          
           <nav class="nav-container">
             <a href="your-restaurants.html" class="button boxed"
               >Your Restaurants</a
@@ -33,13 +34,21 @@ export class HeaderElement extends LitElement {
 
   static styles = css`
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      background-color: var(--secondary-color);
-      color: var(--secondary-color);
-    }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  background-color: var(--secondary-color);
+  color: var(--secondary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000000;
+  width: 100%;
+  border: 5px solid black;
+  box-sizing: border-box;
+}
 
     .header-user {
       color: var(--font-color-default);
@@ -55,6 +64,11 @@ export class HeaderElement extends LitElement {
       font-family: var(--font-family-secondary);
       font-size: 2em;
       padding-left: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--font-color-default);
     }
 
     .header-left {

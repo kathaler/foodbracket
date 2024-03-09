@@ -6,6 +6,8 @@
     /* Other tokens */
     --padding-standard: 10px;
     --border-standard: 5px solid;
+
+    --header-height: 80px;
   }
 
   body.dark {

@@ -56,7 +56,7 @@ class CardMenu extends App.View {
       flex-wrap: wrap;
       justify-content: space-evenly;
       overflow: auto;
-      height: 80vh;
+      height: 100vh;
       gap: 16px;
     }
   `];

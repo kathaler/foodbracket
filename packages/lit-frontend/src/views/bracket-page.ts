@@ -3,10 +3,11 @@ import * as App from "../app";
 import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import "../components/restaurant-panel.ts";
+import "../components/bracket-render.ts";
 
 export class BracketPageElement extends App.View {
-  @property({ type: Array })
-  cards_selected: Restaurant[] = [];
+  @state()
+  _matches: Restaurant[] = [];
   
   @state()
   _round: number = 0;
@@ -37,14 +38,14 @@ export class BracketPageElement extends App.View {
   `;
 
   firstUpdated() {
-    this.cards_selected = this.restaurants;
-    if (this.cards_selected.length > 0) {
+    this._matches = this.restaurants;
+    if (this._matches.length > 0) {
       localStorage.setItem(
         "selectedRestaurants",
-        JSON.stringify(this.shuffleArray(this.cards_selected))
+        JSON.stringify(this.shuffleArray(this._matches))
       );
     } else {
-      this.cards_selected = localStorage.getItem("selectedRestaurants")
+      this._matches = localStorage.getItem("selectedRestaurants")
         ? JSON.parse(localStorage.getItem("selectedRestaurants") as string)
         : [];
     }
@@ -60,10 +61,10 @@ export class BracketPageElement extends App.View {
 
   renderBracket() {
     const matches = [];
-    for (let i = 0; i < this.cards_selected.length; i += 2) {
+    for (let i = 0; i < this._matches.length; i += 2) {
       matches.push(
         html`<div class="match">
-          ${this.cards_selected[i]?.name} vs ${this.cards_selected[i + 1]?.name}
+          ${this._matches[i]?.name} vs ${this._matches[i + 1]?.name}
         </div>`
       );
     }
@@ -78,8 +79,8 @@ export class BracketPageElement extends App.View {
         Begin Tournament
       </button>
       ${this.bracket_started ? html`
-      <restaurant-panel side="left" .restaurant=${this.cards_selected[this._round * 2]}></restaurant-panel>
-      <restaurant-panel side="right" .restaurant=${this.cards_selected[(this._round * 2) + 1]}></restaurant-panel>`
+      <restaurant-panel side="left" .restaurant=${this._matches[this._round * 2]}></restaurant-panel>
+      <restaurant-panel side="right" .restaurant=${this._matches[(this._round * 2) + 1]}></restaurant-panel>`
       : html``}
     `;
   }
@@ -89,14 +90,14 @@ export class BracketPageElement extends App.View {
     document.addEventListener("panel-clicked", this.handlePanelClicked.bind(this) as unknown as EventListener);
   }
 
-  disconnectedCallbackconnectedCallback(): void {
+  disconnectedCallback(): void {
     document.removeEventListener("panel-clicked", this.handlePanelClicked.bind(this) as unknown as EventListener);
     super.disconnectedCallback();
   }
 
   async handlePanelClicked(e: CustomEvent) {
-    const restaurant = e.detail as Restaurant;
-    if (!restaurant) return;
+    const detail = e.detail;
+    if (!detail) return;
 
     const leftPanel = this.shadowRoot?.querySelector("restaurant-panel[side=left]") as any;
     const rightPanel = this.shadowRoot?.querySelector("restaurant-panel[side=right]") as any;
@@ -105,6 +106,7 @@ export class BracketPageElement extends App.View {
       await Promise.all([leftPanel.closePanel(), rightPanel.closePanel()]);
     }
 
+    this._matches.push(detail.restaurant);
     this._round++;
     this.requestUpdate();
 

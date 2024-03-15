@@ -88,3 +88,15 @@ dispatch.addMessage("CardClicked", (msg: App.Message, model: App.Model) => {
     return App.noUpdate(model);
   }
 });
+
+dispatch.addMessage("BracketCompleted", (msg: App.Message, model: App.Model) => {
+  const { winner } = msg as App.BracketCompleted;
+  console.log("Winner:", winner);
+  if (winner) {
+    history.pushState({}, '', '/app/bracket/result');
+    return App.updateProps({ winner })(model);
+  } else {
+    return App.noUpdate(model);
+  }
+
+});

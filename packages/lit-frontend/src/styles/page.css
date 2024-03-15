@@ -55,7 +55,7 @@ ul li {
 }
 
 form {
-  background-color: #b3b2b2;
+  background-color: #262622;
   padding: 20px;
   margin: 30px auto;
   display: inline-block;
@@ -74,6 +74,7 @@ input[type="submit"] {
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  font-size: large;
 }
 
 input[type="submit"]:hover {
@@ -186,9 +187,7 @@ body {
 
 header,
 .boxed,
-.match,
 .links,
-.match-item,
 .user {
   background-color: var(--secondary-color);
 }
@@ -200,7 +199,7 @@ header {
 h1,
 p,
 input[type="submit"] {
-  color: var(--font-color-tertiary);
+  color: var(--primary-color);
 }
 
 label {
@@ -213,10 +212,6 @@ h2 {
 
 a {
   color: var(--accent-color);
-}
-
-form {
-  background-color: #b3b2b2;
 }
 
 .container {

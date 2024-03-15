@@ -20,9 +20,10 @@ export class RestaurantPanelElement extends App.View {
     unsafeCSS(resetCSS),
     css`
       :host {
-        --panel-width: 50vw;
-        --header-height: 70px;
+        --panel-width: 45vw;
+        --header-height: var(--header-height, 70px);
       }
+
       .panel {
         position: fixed;
         bottom: 0;
@@ -30,64 +31,82 @@ export class RestaurantPanelElement extends App.View {
         height: 85vh;
         background-color: var(--tertiary-color);
         transition: transform 0.5s ease-in-out;
-        z-index: 0;
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        padding: var(--padding-standard);
       }
-      .panel.open.right {
-        transform: translateX(0%);
-      }
+
+      .panel.open.right,
       .panel.open.left {
         transform: translateX(0%);
       }
+
       .panel:hover {
         background-color: var(--secondary-color);
       }
+
       .right {
-        transform: translateX(100%);
         right: 0;
+        transform: translateX(100%);
       }
+
       .left {
-        transform: translateX(-100%);
         left: 0;
+        transform: translateX(-100%);
       }
+
       .name,
       .ratings,
       .delivery,
       .price-range,
       .food-type {
-        color: white;
+        color: var(--font-color-default);
+        font-family: var(--font-family-primary);
       }
 
       .name {
-        font-size: 50px;
+        font-size: 2rem;
         font-weight: bold;
-        color: white;
-        margin-bottom: 8px;
+        margin-bottom: var(--padding-standard);
       }
 
       .photo {
         width: 25%;
-        height: 25%;
-        border-radius: 4px;
-        margin-bottom: 8px;
+        height: auto;
+        border-radius: var(--padding-standard);
+        margin-bottom: var(--padding-standard);
       }
 
       .ratings {
         display: flex;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: var(--padding-standard);
       }
 
       .rating-icon {
         color: #f8ce0b;
-        margin-right: 4px;
+        margin-right: var(--padding-standard);
       }
 
-      .delivery {
-        margin-bottom: 8px;
+      .delivery,
+      .price-range,
+      .address {
+        margin-bottom: var(--padding-standard);
+        font-family: var(--font-family-secondary);
+        color: var(--font-color-tertiary);
+        display: flex;
+        padding: var(--padding-standard);
       }
 
-      .price-range {
-        margin-bottom: 8px;
+      @media (max-width: 768px) {
+        :host {
+          --panel-width: 80vw;
+        }
+      }
+
+      .label {
+        color: #a17a7a;
+        padding-right: var(--padding-standard);
       }
     `,
   ];
@@ -107,12 +126,17 @@ export class RestaurantPanelElement extends App.View {
                 ${this.restaurant.ratings}
               </div>
               <div class="delivery">
-                Delivery: ${this.restaurant.delivery ? "Yes" : "No"}
+                <div class="label">Delivery:</div>
+                ${this.restaurant.delivery ? "Yes" : "No"}
               </div>
               <div class="price-range">
-                Price Range: ${this.restaurant.price}
+                <div class="label">Price Range:</div>
+                ${this.restaurant.price}
               </div>
-              <div class="address">Address: ${this.restaurant.location}</div>
+              <div class="address">
+                <div class="label">Address:</div>
+                ${this.restaurant.location}
+              </div>
             </div>`
           : html``}
       </div>
@@ -132,7 +156,7 @@ export class RestaurantPanelElement extends App.View {
 
   closePanel() {
     this.open = false;
-    return new Promise(resolve => setTimeout(resolve, 500));
+    return new Promise((resolve) => setTimeout(resolve, 500));
   }
 
   _handleClick(event: Event) {

@@ -11,6 +11,7 @@ export interface Model {
   profile?: Profile;
   restaurants: Restaurants;
   selected: Restaurant[];
+  winner?: Restaurant;
 }
 
 export const context = createContext<Model>("FoodBracketModel");
@@ -38,7 +39,11 @@ export interface CardClicked extends MsgType<"CardClicked"> {
   restaurant: Restaurant;
 }
 
-export type Message = ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked;
+export interface BracketCompleted extends MsgType<"BracketCompleted"> {
+  winner: Restaurant;
+}
+
+export type Message = ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked | BracketCompleted;
 
 export class Main
   extends MVU.Main<Model, Message>

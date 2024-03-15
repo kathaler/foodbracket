@@ -1,9 +1,11 @@
-import { css, html } from "lit";
+import { css, html, unsafeCSS } from "lit";
 import * as App from "../app";
 import { property, state } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import "../components/restaurant-panel.ts";
 import "../components/bracket-render.ts";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 export class BracketPageElement extends App.View {
   @state()
@@ -17,17 +19,23 @@ export class BracketPageElement extends App.View {
     return this.getFromModel("selected") as Restaurant[];
   }
 
+  @property( { type: Object }) 
+  winner: Restaurant | null = null;
+
   @property({ type: Boolean})
   bracket_started = false;
 
-  static styles = css`
+  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS), css`
     .bracket {
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: var(--primary-color);
     }
     .match {
       margin: 1rem 0;
+      font-size: 1.2rem;
+      display: flex;
     }
     .tournament-button {
       margin-top: 2rem;
@@ -35,7 +43,15 @@ export class BracketPageElement extends App.View {
       font-size: 1rem;
       cursor: pointer;
     }
-  `;
+    h1 {
+      color: var(--font-color-default);
+      background-color: var(--background-color);
+    }
+    .vs {
+      color: #ca6161;
+      margin: 0 1rem;
+    }
+  `];
 
   firstUpdated() {
     this._matches = this.restaurants;
@@ -64,7 +80,9 @@ export class BracketPageElement extends App.View {
     for (let i = 0; i < this._matches.length; i += 2) {
       matches.push(
         html`<div class="match">
-          ${this._matches[i]?.name} vs ${this._matches[i + 1]?.name}
+          ${this._matches[i]?.name} 
+          <div class="vs"> vs </div> 
+          ${this._matches[i + 1]?.name}
         </div>`
       );
     }
@@ -73,7 +91,7 @@ export class BracketPageElement extends App.View {
 
   render() {
     return html`
-      <h1>Bracket Page</h1>
+      <h1>Restaurant Matchups</h1>
       <div class="bracket">${this.renderBracket()}</div>
       <button class="tournament-button" @click=${this.beginTournament}>
         Begin Tournament
@@ -109,6 +127,14 @@ export class BracketPageElement extends App.View {
     this._matches.push(detail.restaurant);
     this._round++;
     this.requestUpdate();
+
+    if (this._round === 7) {
+      console.log("Winner is", detail.restaurant);
+      this.dispatchMessage({
+        type: "BracketCompleted",
+        winner: detail.restaurant
+      })
+    }
 
     this.updateComplete.then(() => {
       if(leftPanel && rightPanel) {

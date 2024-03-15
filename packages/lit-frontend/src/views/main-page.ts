@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { css, html, unsafeCSS } from "lit";
 import "../components/preferences-form.ts";
 import "../components/card-menu.ts";
 import resetCSS from "/src/styles/reset.css?inline";
@@ -49,7 +49,11 @@ export class MainPageElement extends App.View {
     `;
   }
 
-  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS)];
+  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS), css`
+    li {
+      color: var(--font-color-default);
+    }
+  `];
 }
 
 customElements.define("main-page", MainPageElement);

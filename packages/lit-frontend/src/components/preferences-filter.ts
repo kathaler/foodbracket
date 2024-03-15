@@ -1,5 +1,7 @@
-import { LitElement, html } from "lit";
+import { LitElement, css, html, unsafeCSS } from "lit";
 import { state } from "lit/decorators.js";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 class PreferencesFilter extends LitElement {
   @state() private delivery: boolean = false;
@@ -39,6 +41,14 @@ class PreferencesFilter extends LitElement {
       </div>
     `;
   }
+
+  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS), css`
+    label {
+      font-size: 1.2rem;
+      color: var(--font-color-tertiary);
+    }
+  
+  `];
 
   _handleChange(event: Event) {
     const target = event.target as HTMLInputElement;

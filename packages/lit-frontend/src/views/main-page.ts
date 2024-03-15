@@ -1,4 +1,4 @@
-import { LitElement, html, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import "../components/preferences-form.ts";
 import "../components/card-menu.ts";
 import resetCSS from "/src/styles/reset.css?inline";

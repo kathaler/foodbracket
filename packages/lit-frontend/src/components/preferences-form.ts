@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
 import { state } from "lit/decorators.js";
 import "./preferences-filter";
 import * as App from "../app";

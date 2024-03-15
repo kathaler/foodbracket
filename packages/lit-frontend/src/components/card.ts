@@ -1,5 +1,5 @@
-import { html, css, LitElement, unsafeCSS } from "lit";
-import { property, state } from "lit/decorators.js";
+import { html, css, unsafeCSS } from "lit";
+import { property } from "lit/decorators.js";
 import { Restaurant } from "ts-models";
 import resetCSS from "/src/styles/reset.css?inline";
 import pageCSS from "/src/styles/page.css?inline";

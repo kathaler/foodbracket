@@ -123,7 +123,6 @@ export class UserProfileEditElement extends UserProfileElement {
     const profile = (this.profile || {}) as Profile;
     const { userid, name, nickname, zip, city } = profile;
 
-    console.log("Rendering form", this.profile);
     return html`
       <section>
         <form @submit=${this._handleSubmit}>

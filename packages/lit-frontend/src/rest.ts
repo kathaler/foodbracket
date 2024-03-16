@@ -4,7 +4,7 @@ const TOKEN_KEY = "JWT_AUTH_TOKEN";
 
 export class APIUser {
   authenticated = false;
-  username = "karl";
+  username = "fellow_traveler";
   signOut = () => {};
 
   static _theUser = new APIUser();
@@ -20,10 +20,6 @@ export class APIUser {
 
     return anon;
   }
-}
-
-export class TestUser {
-  username = "test";
 }
 
 export class EmptyRestaurants {
@@ -62,9 +58,13 @@ export class AuthenticatedUser extends APIUser {
   }
 
   static authenticate(token: string, signOut: () => void) {
-    APIUser._theUser = new AuthenticatedUser(token, signOut);
+    const authenticatedUser = new AuthenticatedUser(
+      token,
+      signOut
+    );
+    APIUser._theUser = authenticatedUser;
     localStorage.setItem(TOKEN_KEY, token);
-    return APIUser._theUser;
+    return authenticatedUser;
   }
 
   static authenticateFromLocalStorage(signOut: () => void) {

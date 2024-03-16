@@ -3,11 +3,11 @@ import { consume, createContext, provide } from "@lit/context";
 import { Profile, Restaurants, Restaurant } from "ts-models";
 import * as MVU from "./mvu";
 import { MsgType } from "./mvu";
-import { TestUser, EmptyRestaurants } from "./rest";
+import { EmptyRestaurants, APIUser, AuthenticatedUser } from "./rest";
 
 
 export interface Model {
-  user: TestUser;
+  user: APIUser;
   profile?: Profile;
   restaurants: Restaurants;
   selected: Restaurant[];
@@ -17,10 +17,14 @@ export interface Model {
 export const context = createContext<Model>("FoodBracketModel");
 
 export const init: Model = {
-  user: new TestUser(),
+  user: new APIUser(),
   restaurants: new EmptyRestaurants(),
   selected: []
 };
+
+export interface UserLoggedIn extends MsgType<"UserLoggedIn"> {
+  user: AuthenticatedUser;
+}
 
 export interface ProfileSelected extends MsgType<"ProfileSelected"> {
   userid: string;
@@ -43,7 +47,11 @@ export interface BracketCompleted extends MsgType<"BracketCompleted"> {
   winner: Restaurant;
 }
 
-export type Message = ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked | BracketCompleted;
+export interface NewProfile extends MsgType<"NewProfile"> {
+  userid: string;
+}
+
+export type Message = UserLoggedIn | ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked | BracketCompleted | NewProfile;
 
 export class Main
   extends MVU.Main<Model, Message>

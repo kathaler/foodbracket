@@ -1,8 +1,7 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 
-@customElement("toggle-switch")
-class ToggleSwitchElement extends LitElement {
+export class ToggleSwitchElement extends LitElement {
   @property({ type: Boolean })
   on = false;
 
@@ -74,4 +73,4 @@ class ToggleSwitchElement extends LitElement {
   }
 }
 
-customElements.define("switch-toggle", ToggleSwitchElement);
+customElements.define("toggle-switch", ToggleSwitchElement);

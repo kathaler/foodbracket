@@ -28,4 +28,8 @@ function update(userid: String, profile: Profile): Promise<Profile> {
     });
 }
 
-export default { index, get, create, update };
+export function deleteProfiles(): Promise<any> {
+    return ProfileModel.deleteMany();
+  }
+
+export default { index, get, create, update, deleteProfiles };

@@ -1,6 +1,6 @@
 export interface Profile {
     userid: string;
-    name: string;
+    name?: string;
     nickname?: string;
     zip?: string;
     city?: string;

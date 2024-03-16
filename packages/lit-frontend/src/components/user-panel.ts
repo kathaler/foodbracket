@@ -1,9 +1,9 @@
 import { html, css, LitElement } from "lit";
-import { property } from "lit/decorators.js";
+import "./toggle-switch";
 
 class UserPanel extends LitElement {
-  @property()
-  avatar: string = "";
+  // @property()
+  // avatar: string = "";
 
   static styles = css`
     :host {
@@ -23,6 +23,7 @@ class UserPanel extends LitElement {
     .header {
       display: flex;
       align-items: center;
+      color: black
     }
 
     ul {
@@ -45,18 +46,16 @@ class UserPanel extends LitElement {
 
   render() {
     return html`
-            <div class="header"> 
-                <img src=${this.avatar} />
-                <h2 name="name">John Doe</h2>
-            </div>
-            <div class="menu"></div>
-            <div class="horizontal-line"></div>
-            <ul>
-                <li><a href="./profile/karl" class="button boxed">Profile</a></li>
-                <li><a href="preferences.html" class="button boxed">Preferences</a></li>
-                <li>Logout</li>
-            </ul>
-            <toggle-switch></toggle-switch>
+      <ul>
+        <li class="header">
+          <h1><slot name="name">Your Name</slot></h1>
+        </li>
+        <slot></slot>
+        <toggle-switch></toggle-switch>
+        <li>
+          <slot name="logout">Sign out&hellip;</slot>
+        </li>
+      </ul>
         `;
   }
 }

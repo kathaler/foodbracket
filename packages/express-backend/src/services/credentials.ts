@@ -1,13 +1,41 @@
-import { Credential } from "ts-models";
-import CredentialModel from "../models/mongo/credential";
 import bcrypt from "bcrypt";
+import credentialModel from "../models/mongo/credential";
+import { Credential } from "ts-models";
 
-function create(username: string, password: string) {
+export function verify(username: string, password: string): Promise<String> {
+  return new Promise<String>((resolve, reject) => {
+    credentialModel
+      .find({ username })
+      .then((found) => {
+        if (found && found.length === 1) return found[0];
+        else reject("Invalid username or password");
+      })
+      .then((credsOnFile) => {
+        if (credsOnFile)
+          bcrypt.compare(password, credsOnFile.hashedPassword, (_, result) => {
+            console.log("Verified", result, credsOnFile.username);
+            if (result) resolve(credsOnFile.username);
+            else reject("Invalid username or password");
+          });
+        else reject("Invalid username or password");
+      });
+  });
+}
+
+export function checkExists(username: string) {
+  return new Promise<boolean>((resolve, reject) => {
+    credentialModel
+      .find({ username })
+      .then((found) => resolve(found && found.length > 0));
+  });
+}
+
+export function create(username: string, password: string) {
   return new Promise<Credential>((resolve, reject) => {
     if (!username || !password) {
       reject("must provide username and password");
     }
-    CredentialModel
+    credentialModel
       .find({ username })
       .then((found: Credential[]) => {
         if (found.length) reject("username exists");
@@ -17,9 +45,9 @@ function create(username: string, password: string) {
           .genSalt(10)
           .then((salt: string) => bcrypt.hash(password, salt))
           .then((hashedPassword: string) => {
-            const creds = new CredentialModel({
+            const creds = new credentialModel({
               username,
-              hashedPassword
+              hashedPassword,
             });
             creds.save().then((created: Credential) => {
               if (created) resolve(created);
@@ -29,32 +57,12 @@ function create(username: string, password: string) {
   });
 }
 
-function verify(username: string, password: string): Promise<String> {
-  return new Promise<String>((resolve, reject) => {
-    CredentialModel
-      .find({ username })
-      .then((found) => {
-        if (found && found.length == 1) return found[0];
-        else return reject("Invalid username or password");
-      })
-      .then((credsOnFile) => {
-        if (credsOnFile)
-          return bcrypt.compare(password, credsOnFile.hashedPassword);
-        else reject("Invalid username or password");
-      })
-      .then((match) => {
-        if (match) resolve(username);
-        else reject("Invalid username or password");
-      });
-  });
+export function index(): Promise<Credential[]> {
+  return credentialModel.find();
 }
 
-function index(): Promise<Credential[]> {
-  return CredentialModel.find();
+export function deleteCredentials(): Promise<any> {
+  return credentialModel.deleteMany();
 }
 
-function deleteCredentials(): Promise<any> {
-  return CredentialModel.deleteMany();
-}
-
-export default { create, verify, index, deleteCredentials };
+export default { checkExists, create, verify, index, deleteCredentials };

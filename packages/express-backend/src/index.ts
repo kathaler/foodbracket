@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { connect } from "./mongoConnect";
 
-import { generateAccessToken } from "./auth";
+import { generateAccessToken, loginUser, registerUser } from "./auth";
 
 import { PathLike } from "node:fs";
 import path from "node:path";
@@ -41,6 +41,9 @@ console.log(`Serving ${frontend} from`, dist);
 
 if (dist) app.use(express.static(dist.toString()));
 
+app.post("/login", loginUser);
+app.post("/signup", registerUser);
+
 // Serve index.html for all non-API requests (Client-Side Routing)
 app.get(/^(?!\/api).*/, (req, res) => {
   if (!indexHtml) {
@@ -62,14 +65,6 @@ app.get("/", (req: Request, res: Response) => {
   res.send("<h1>Hello World!</h1>");
 });
 
-app.get("/api/profiles/:userid", (req: Request, res: Response) => {
-  const { userid } = req.params;
-  profiles
-    .get(userid)
-    .then((profile: Profile) => res.json(profile))
-    .catch((err) => res.status(404).end());
-});
-
 app.get("/api/profiles", (req: Request, res: Response) => {
   profiles
     .index()
@@ -83,6 +78,25 @@ app.post("/api/profiles", (req: Request, res: Response) => {
     .create(newProfile)
     .then((profile: Profile) => res.status(201).send(profile))
     .catch((err) => res.status(500).end());
+});
+
+app.delete("/api/profiles", (req: Request, res: Response) => {
+  profiles
+  .deleteProfiles()
+  .then(() => res.status(204).end())
+  .catch((err) => res.status(404).end());
+});
+
+app.get("/api/profiles/:userid", (req: Request, res: Response) => {
+  const { userid } = req.params;
+
+  profiles
+    .get(userid)
+    .then((profile: Profile | undefined) => {
+      if (!profile) throw "Not found";
+      else res.json(profile);
+    })
+    .catch((err) => res.status(404).end());
 });
 
 app.put("/api/profiles/:userid", (req: Request, res: Response) => {

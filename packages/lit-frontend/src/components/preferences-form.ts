@@ -1,13 +1,15 @@
-import { html, css } from "lit";
+import { html, css, unsafeCSS } from "lit";
 import { state } from "lit/decorators.js";
 import "./preferences-filter";
 import * as App from "../app";
+import resetCSS from "/src/styles/reset.css?inline";
+import pageCSS from "/src/styles/page.css?inline";
 
 class PreferencesForm extends App.View {
   @state() private location: string = "";
   @state() private submitted: boolean = false;
 
-  static styles = css`
+  static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS), css`
     #location-prompt {
       display: grid;
       gap: 20px;
@@ -19,9 +21,22 @@ class PreferencesForm extends App.View {
       gap: 10px;
       align-items: center;
       margin: 30px auto;
-      text-align: left;
     }
-  `;
+
+    label {
+      font-size: 1.5rem;
+      color: var(--font-color-tertiary);
+    }
+
+    h1 {
+      color: var(--font-color-default);
+      justify-content: center;
+    }
+
+    strong {
+      align-items: center;
+    }
+  `];
 
   render() {
     
@@ -29,7 +44,7 @@ class PreferencesForm extends App.View {
     <div class="preferencesForm">
     ${this.submitted 
       ? html`
-          <h1>${this.location}</h1>
+          <h1>Location: <strong>${this.location}</strong></h1>
           <preferences-filter></preferences-filter>
       `
       : html`

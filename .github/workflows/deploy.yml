@@ -50,9 +50,7 @@ jobs:
         working-directory: packages/express-backend
 
       - name: Zip backend
-        run: |
-          cd packages/express-backend
-          zip -r backend.zip .
+        run: zip -r backend.zip .
         working-directory: packages/express-backend
 
       - name: Upload backend zip to S3

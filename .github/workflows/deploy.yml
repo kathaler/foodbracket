@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -42,12 +46,22 @@ jobs:
         run: npm run build
         working-directory: packages/express-backend
 
+      - name: Zip backend
+        run: zip -r backend.zip .
+        working-directory: packages/express-backend
+
+      - name: Upload backend zip to S3
+        run: |
+          aws s3 cp packages/express-backend/backend.zip s3://foodbracket-frontend/backend.zip
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
       - name: Deploy backend to Elastic Beanstalk
         run: |
-          zip -r backend.zip .
-          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label latest --source-bundle S3Bucket=foodbracket-frontend,S3Key=backend.zip
-          aws elasticbeanstalk update-environment --application-name foodbracket-backend --environment-name foodbracket-backend-env --version-label latest
-        working-directory: packages/express-backend
+          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label latest --source-bundle S3Bucket=foodbracket-frontend,S3Key=backend.zip --region ${{ secrets.AWS_REGION }}
+          aws elasticbeanstalk update-environment --application-name foodbracket-backend --environment-name Foodbracket-backend-env --version-label latest
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -55,7 +69,7 @@ jobs:
 
       - name: Invalidate CloudFront cache
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_ID }} --paths "/*"
+          aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

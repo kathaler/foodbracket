@@ -119,11 +119,10 @@ dispatch.addMessage("CardClicked", (msg: App.Message, model: App.Model) => {
   }
 });
 
-dispatch.addMessage(
-  "BracketCompleted",
-  (msg: App.Message, model: App.Model) => {
+dispatch.addMessage("BracketCompleted", (msg: App.Message, model: App.Model) => {
     const { winner } = msg as App.BracketCompleted;
     console.log("Winner:", winner);
+    console.log("Model:", model);
     if (winner) {
       history.pushState({}, "", "/app/bracket/result");
       return App.updateProps({ winner })(model);
@@ -132,3 +131,14 @@ dispatch.addMessage(
     }
   }
 );
+
+// dispatch.addMessage("ClearRestaurantsFields", (msg: App.Message, model: App.Model) => {
+//   const resetRestaurants = new EmptyRestaurants(); 
+//   console.log("Resetting restaurants");
+//   return App.updateProps({
+//     restaurants: resetRestaurants,
+//     selected: [],
+//     winner: undefined
+//   })(model);
+// });
+

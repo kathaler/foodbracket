@@ -89,7 +89,7 @@ export class UserProfileElement extends App.View {
   `;
 
   render() {
-    const { userid, name, nickname, zip, city } = (this.profile ||
+    const { userid, name, nickname, zip, city, restaurants } = (this.profile ||
       {}) as Profile;
     return html`
       <section>
@@ -111,6 +111,14 @@ export class UserProfileElement extends App.View {
           <div class="profile-item">
             <dt>Home City</dt>
             <dd>${city}</dd>
+          </div>
+          <div class="profile-item">
+            <dt>Restaurants</dt>
+            <dd>
+              <ul>
+                ${restaurants?.map((restaurant) => html`<li>${restaurant}</li>`)}
+              </ul>
+            </dd>
           </div>
         </dl>
       </section>

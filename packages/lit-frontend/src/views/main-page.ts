@@ -49,6 +49,13 @@ export class MainPageElement extends App.View {
     `;
   }
 
+  connectedCallback() {
+    this.dispatchMessage({type: "ClearRestaurantFields"});
+
+    super.connectedCallback();
+    this.requestUpdate();
+  }
+
   static styles = [unsafeCSS(resetCSS), unsafeCSS(pageCSS), css`
     li {
       color: var(--font-color-default);

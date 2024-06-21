@@ -13,6 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      AWS_REGION: us-west-1
+      VERSION_LABEL: v${{ github.run_number }}-${{ github.sha }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,7 +26,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm install
         working-directory: packages/lit-frontend
 
@@ -32,11 +36,10 @@ jobs:
 
       - name: Upload frontend to S3
         run: |
-          aws s3 sync packages/lit-frontend/dist s3://foodbracket-frontend --delete
+          aws s3 sync packages/lit-frontend/dist s3://foodbracket-frontend --delete --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Install backend dependencies
         run: npm install
@@ -52,25 +55,22 @@ jobs:
 
       - name: Upload backend zip to S3
         run: |
-          aws s3 cp packages/express-backend/backend.zip s3://foodbracket-frontend/backend.zip
+          aws s3 cp packages/express-backend/backend.zip s3://foodbracket-frontend/backend.zip --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Deploy backend to Elastic Beanstalk
         run: |
-          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label latest --source-bundle S3Bucket=foodbracket-frontend,S3Key=backend.zip --region ${{ secrets.AWS_REGION }}
-          aws elasticbeanstalk update-environment --application-name foodbracket-backend --environment-name Foodbracket-backend-env --version-label latest
+          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label ${{ env.VERSION_LABEL }} --source-bundle S3Bucket=foodbracket-frontend,S3Key=backend.zip --region ${{ env.AWS_REGION }}
+          aws elasticbeanstalk update-environment --application-name foodbracket-backend --environment-name Foodbracket-backend-env --version-label ${{ env.VERSION_LABEL }} --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Invalidate CloudFront cache
         run: |
-          aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+          aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*" --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}

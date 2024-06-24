@@ -50,12 +50,14 @@ jobs:
         working-directory: packages/express-backend
 
       - name: Zip backend
-        run: zip -r backend.zip .
-        working-directory: packages/express-backend
+        run: |
+          cd packages/express-backend
+          zip -r backend.zip dist node_modules package.json .ebextensions Procfile
+        working-directory: .
 
       - name: Upload backend zip to S3
         run: |
-          aws s3 cp packages/express-backend/backend.zip s3://foodbracket-frontend/backend.zip --region ${{ env.AWS_REGION }}
+          aws s3 cp backend.zip s3://foodbracket-backend/backend.zip --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -63,7 +65,7 @@ jobs:
       - name: Deploy backend to Elastic Beanstalk
         run: |
           VERSION_LABEL=$(date +%Y%m%d%H%M%S)
-          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label $VERSION_LABEL --source-bundle S3Bucket=foodbracket-frontend,S3Key=backend.zip --region ${{ env.AWS_REGION }}
+          aws elasticbeanstalk create-application-version --application-name foodbracket-backend --version-label $VERSION_LABEL --source-bundle S3Bucket=foodbracket-backend,S3Key=backend.zip --region ${{ env.AWS_REGION }}
           aws elasticbeanstalk update-environment --application-name foodbracket-backend --environment-name Foodbracket-backend-env --version-label $VERSION_LABEL --region ${{ env.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

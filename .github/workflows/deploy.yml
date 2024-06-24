@@ -53,6 +53,7 @@ jobs:
         run: |
           cd packages/express-backend
           zip -r backend.zip dist node_modules package.json .ebextensions Procfile
+          mv backend.zip ../../
         working-directory: .
 
       - name: Upload backend zip to S3

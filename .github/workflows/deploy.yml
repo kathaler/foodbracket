@@ -52,7 +52,8 @@ jobs:
       - name: Zip backend
         run: |
           cd packages/express-backend
-          zip -r backend.zip dist node_modules package.json .ebextensions Procfile
+          cp -R node_modules/ dist/node_modules
+          zip -r backend.zip dist package.json .ebextensions Procfile
           mv backend.zip ../../
         working-directory: .
 

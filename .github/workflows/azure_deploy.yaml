@@ -24,6 +24,13 @@ jobs:
          - name: Build
            run: npm run build
 
+         - name: Setup Git Credentials
+           run: |
+             git config --global user.email "kthaler@calpoly.edu"
+             git config --global user.name "kathaler"
+             git remote add azure https://$AZURE_USERNAME:$AZURE_PASSWORD@foodbracket.scm.azurewebsites.net:443/foodbracket.git
+     
+
          - name: Push to Azure Local Git
            run: |
              git remote add azure https://foodbracket.scm.azurewebsites.net:443/foodbracket.git

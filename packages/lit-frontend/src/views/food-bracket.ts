@@ -14,12 +14,10 @@ export class FoodBracketElement extends App.Main {
   render() {
     return html`
       <div class="container">
-        <auth-required>
         <header-element></header-element>
         <div class="main">
           <vaadin-router .routes=${routes}></vaadin-router>
         </div>
-        </auth-required>
       </div>
     `;
   }

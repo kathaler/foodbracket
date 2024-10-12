@@ -1,0 +1,33 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+   build-and-deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+         - name: Checkout repository
+           uses: actions/checkout@v2
+         
+         - name: Setup Node.js
+           uses: actions/setup-node@v2
+           with:
+            node-version: '16'
+
+         - name: Install dependencies
+           run: npm install
+
+         - name: Build
+           run: npm build
+
+         - name: Push to Azure Local Git
+           run: |
+             git remote add azure https://foodbracket.scm.azurewebsites.net:443/foodbracket.git
+             git push azure main
+           env:
+             AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
+             AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}

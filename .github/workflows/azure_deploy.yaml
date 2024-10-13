@@ -33,6 +33,9 @@ jobs:
         AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
         AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
 
+    - name: Pull latest changes from Azure
+      run: git pull azure main --rebase
+
     - name: Push to Azure Local Git
       run: |
         git push azure main

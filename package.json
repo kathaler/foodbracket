@@ -1,30 +1,28 @@
 {
-   "name": "foodbracket",
-   "version": "1.0.0",
-   "description": "A web app for users to choose a local restaurant through an interactive, bracket-style tournament",
-   "main": "index.js",
-   "scripts": {
-     "build:frontend": "cd packages/lit-frontend && npm install && npm run build",
-     "build:backend": "cd packages/express-backend && npm install && npm run build",
-     "build": "npm install && npm run build:frontend && npm run build:backend",
-     "start": "npm run build && npm run start:backend",
-     "start:frontend": "cd packages/lit-frontend && npm run dev",
-     "start:backend": "cd packages/express-backend && npm run start"
-   },
-   "repository": {
-     "type": "git",
-     "url": "git+https://github.com/kathaler/foodbracket.git"
-   },
-   "author": "",
-   "license": "ISC",
-   "workspaces": [
-     "packages/*"
-   ],
-   "dependencies": {
-     "bcrypt": "^5.1.1",
-     "typescript": "^5.6.3"
-   },
-   "engines": {
-     "node": ">=14.0.0"
-   }
- }
+  "name": "foodbracket",
+  "version": "1.0.0",
+  "description": "A web app for users to choose a local restaurant through an interactive, bracket-style tournament",
+  "main": "index.js",
+  "scripts": {
+   "build:frontend": "cd packages/lit-frontend && npm ci && npm run build",
+   "build:backend": "cd packages/express-backend && npm ci && npm run build",
+   "build": "npm ci && npm run build:frontend && npm run build:backend",
+   "start": "npm run build && npm run start:backend",
+   "start:backend": "cd packages/express-backend && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kathaler/foodbracket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "bcrypt": "^5.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

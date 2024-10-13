@@ -17,18 +17,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '20'
-   
-    - name: Update npm
-      run: npm install -g npm@10.9.0
 
     - name: Install dependencies
-      run: npm install --workspaces
+      run: npm install
 
-    - name: Build frontend
-      run: npm run -w lit-frontend build
-
-    - name: Build backend
-      run: npm run -w express-backend build
+    - name: Build the app
+      run: npm run build
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2

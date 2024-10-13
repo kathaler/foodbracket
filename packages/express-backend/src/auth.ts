@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import credentials from "./services/credentials";
 
-function generateAccessToken(username: string) {
+export function generateAccessToken(username: string) {
   console.log("Generating token for", username);
   return new Promise((resolve, reject) => {
     jwt.sign(

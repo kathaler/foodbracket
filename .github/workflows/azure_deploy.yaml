@@ -16,29 +16,17 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20' # Adjust the Node.js version as needed
+        node-version: '20'
 
     - name: Install dependencies
-      run: npm install # Modify this if using a different package manager
+      run: npm install
 
     - name: Build the app
-      run: npm run build # Replace with your build command
+      run: npm run build
 
-    - name: Setup Git Credentials
-      run: |
-        git config --global user.email "your-email@example.com"
-        git config --global user.name "your-username"
-        git remote add azure https://$AZURE_USERNAME:$AZURE_PASSWORD@foodbracket.scm.azurewebsites.net:443/foodbracket.git
-      env:
-        AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
-        AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
-
-    - name: Pull latest changes from Azure
-      run: git pull azure main --rebase
-
-    - name: Push to Azure Local Git
-      run: |
-        git push azure main
-      env:
-        AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
-        AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'your-azure-app-name'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '.'

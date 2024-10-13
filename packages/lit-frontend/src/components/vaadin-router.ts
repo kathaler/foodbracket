@@ -1,9 +1,9 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html } from 'lit';
 import {Route, Router} from '@vaadin/router';
 import { property } from 'lit/decorators.js';
 
 export class VaadinRouterElement extends LitElement {
-    router = new Router(this);
+    router: Router = new Router(this as any);
 
     @property({ attribute: false })
     routes: Route[] = [];

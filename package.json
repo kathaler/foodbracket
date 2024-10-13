@@ -4,22 +4,19 @@
   "description": "A web app for users to choose a local restaurant through an interactive, bracket-style tournament",
   "main": "index.js",
   "scripts": {
-    "build:frontend": "npm run -w lit-frontend build",
-    "build:backend": "npm -w express-backend run build",
-    "build": "npm run build:frontend && npm run build:backend",
-    "start": "npm run build && npm run start:backend",
-    "start:frontend": "npm -w lit-frontend run dev",
-    "start:backend": "npm -w express-backend run start"
-  },
+   "build:frontend": "pnpm --filter lit-frontend run build",
+   "build:backend": "pnpm --filter express-backend run build",
+   "build": "pnpm run build:frontend && pnpm run build:backend",
+   "start": "pnpm run build && pnpm run start:backend",
+   "start:frontend": "pnpm --filter lit-frontend run dev",
+   "start:backend": "pnpm --filter express-backend run start"
+ },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kathaler/foodbracket.git"
   },
   "author": "",
   "license": "ISC",
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "bcrypt": "^5.1.1"
   },

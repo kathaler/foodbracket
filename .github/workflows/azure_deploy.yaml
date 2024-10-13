@@ -1,4 +1,4 @@
-name: Deploy to Azure
+name: Deploy to Azure Web App via Local Git
 
 on:
   push:
@@ -6,34 +6,36 @@ on:
       - main
 
 jobs:
-   build-and-deploy:
-      runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-      steps:
-         - name: Checkout repository
-           uses: actions/checkout@v2
-         
-         - name: Setup Node.js
-           uses: actions/setup-node@v2
-           with:
-            node-version: '16'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-         - name: Install dependencies
-           run: npm install
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20' # Adjust the Node.js version as needed
 
-         - name: Build
-           run: npm run build
+    - name: Install dependencies
+      run: npm install # Modify this if using a different package manager
 
-         - name: Setup Git Credentials
-           run: |
-             git config --global user.email "kthaler@calpoly.edu"
-             git config --global user.name "kathaler"
-             git remote add azure https://$AZURE_USERNAME:$AZURE_PASSWORD@foodbracket.scm.azurewebsites.net:443/foodbracket.git
-     
+    - name: Build the app
+      run: npm run build # Replace with your build command
 
-         - name: Push to Azure Local Git
-           run: |
-             git push azure main
-           env:
-             AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
-             AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
+    - name: Setup Git Credentials
+      run: |
+        git config --global user.email "your-email@example.com"
+        git config --global user.name "your-username"
+        git remote add azure https://$AZURE_USERNAME:$AZURE_PASSWORD@foodbracket.scm.azurewebsites.net:443/foodbracket.git
+      env:
+        AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
+        AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}
+
+    - name: Push to Azure Local Git
+      run: |
+        git push azure main
+      env:
+        AZURE_USERNAME: ${{ secrets.AZURE_USERNAME }}
+        AZURE_PASSWORD: ${{ secrets.AZURE_PASSWORD }}

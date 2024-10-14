@@ -57,6 +57,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'foodbracket'
-          slot-name: 'Production'
-          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C03DB83702D740A3965E630284739DA5 }}

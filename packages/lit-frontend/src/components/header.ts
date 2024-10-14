@@ -34,7 +34,7 @@ export class HeaderElement extends LitElement {
             <a href="contact.html" class="button boxed">Contact</a>
           </nav>
         </div>
-        <nav class="user-nav-container">
+        <!-- <nav class="user-nav-container">
           <p>
             Hello,
             <drop-down align="right">
@@ -46,7 +46,7 @@ export class HeaderElement extends LitElement {
               </user-panel>
             </drop-down>
           </p>
-        </nav>
+        </nav> -->
       </header>
     `;
   }

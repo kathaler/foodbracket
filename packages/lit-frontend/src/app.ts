@@ -51,7 +51,10 @@ export interface NewProfile extends MsgType<"NewProfile"> {
   userid: string;
 }
 
-export type Message = UserLoggedIn | ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked | BracketCompleted | NewProfile;
+export interface ClearRestaurantFields extends MsgType<"ClearRestaurantFields"> {}
+
+
+export type Message = ClearRestaurantFields | UserLoggedIn | ProfileSaved | ProfileSelected | LocationSubmitted | CardClicked | BracketCompleted | NewProfile;
 
 export class Main
   extends MVU.Main<Model, Message>
